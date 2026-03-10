@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deber 1 - Sentencia IF | William Barrionuevo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 30px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Efecto de fondo animado */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><text x="10" y="20" font-size="20">if</text><text x="80" y="40" font-size="25">else</text><text x="20" y="80" font-size="30">{ }</text><text x="70" y="90" font-size="22">()</text></svg>');
+            background-size: 200px 200px;
+            animation: moveBackground 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes moveBackground {
+            0% { background-position: 0 0; }
+            100% { background-position: 200px 200px; }
+        }
+
+        /* Contenedor principal con efecto glassmorphism */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3), 0 0 0 2px rgba(255,255,255,0.1);
+            overflow: hidden;
+            position: relative;
+            animation: slideIn 0.8s ease;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Encabezado con gradiente animado */
+        .header {
+            background: linear-gradient(45deg, #4158D0, #C850C0, #FFCC70);
+            background-size: 200% 200%;
+            animation: gradient 5s ease infinite;
+            color: white;
+            padding: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .header::before {
+            content: '⚡';
+            position: absolute;
+            top: -30px;
+            left: -30px;
+            font-size: 150px;
+            opacity: 0.2;
+            transform: rotate(15deg);
+        }
+
+        .header::after {
+            content: '{}';
+            position: absolute;
+            bottom: -50px;
+            right: -20px;
+            font-size: 180px;
+            opacity: 0.1;
+            transform: rotate(-10deg);
+        }
+
+        .header h1 {
+            font-size: 5rem;
+            margin-bottom: 15px;
+            text-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .header p {
+            font-size: 2rem;
+            opacity: 0.95;
+            font-weight: 300;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(5px);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255,255,255,0.5);
+            animation: float 3s ease infinite;
+        }
+
+        .badge:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .badge:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Contenido principal */
+        .content {
+            padding: 50px;
+        }
+
+        /* Tarjetas de ejercicios */
+        .ejercicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .ejercicio-card {
+            background: white;
+            border-radius: 30px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ejercicio-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .ejercicio-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 45px rgba(102, 126, 234, 0.3);
+        }
+
+        .ejercicio-numero {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ejercicio-numero span {
+            font-size: 1.2rem;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            -webkit-text-fill-color: white;
+        }
+
+        .ejercicio-card h2 {
+            font-size: 1.6rem;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        /* Bloque de código mejorado */
+        .code-block {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            position: relative;
+            border: 3px solid #667eea;
+            box-shadow: 0 10px 0 #4a4a4a;
+        }
+
+        .code-block::before {
+            content: '🐍 Python';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .code-block code {
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            display: block;
+        }
+
+        .code-block .keyword {
+            color: #ff79c6;
+        }
+
+        .code-block .function {
+            color: #50fa7b;
+        }
+
+        .code-block .string {
+            color: #f1fa8c;
+        }
+
+        .code-block .comment {
+            color: #6272a4;
+        }
+
+        /* Ejecutar código botón */
+        .run-code {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #00ff88;
+            color: #000;
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: none;
+            font-weight: bold;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .run-code:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,255,136,0.4);
+        }
+
+        /* Sección de explicación */
+        .explicacion {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 30px;
+            padding: 40px;
+            margin: 40px 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .explicacion::before {
+            content: '❓';
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            font-size: 150px;
+            opacity: 0.2;
+            transform: rotate(20deg);
+        }
+
+        .explicacion h3 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+        }
+
+        .explicacion p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        .explicacion-destacado {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 20px;
+            margin-top: 30px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* Video container */
+        .video-container {
+            margin: 40px 0;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+            border: 3px solid white;
+        }
+
+        .video-container::before {
+            content: '▶️ VIDEO EXPLICATIVO';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            z-index: 1;
+            backdrop-filter: blur(5px);
+        }
+
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            display: block;
+        }
+
+        /* Botones de navegación */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            gap: 20px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 18px 35px;
+            background: white;
+            color: #333;
+            text-decoration: none;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            border: 2px solid #667eea;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-secondary:hover {
+            transform: translateX(-10px);
+            background: #667eea;
+            color: white;
+        }
+
+        /* Footer mejorado */
+        .footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '</>';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 100px;
+            opacity: 0.1;
+            color: #667eea;
+        }
+
+        .footer p {
+            margin: 10px 0;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer .highlight {
+            color: #00ff88;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 3rem;
+            }
+            
+            .header p {
+                font-size: 1.3rem;
+            }
+            
+            .content {
+                padding: 25px;
+            }
+            
+            .ejercicios-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .badge-container {
+                flex-direction: column;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                justify-content: center;
+            }
+            
+            iframe {
+                height: 300px;
+            }
+        }
+
+        /* Animaciones adicionales */
+        .floating {
+            animation: floating 3s ease infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .glow {
+            animation: glow 2s ease infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.6); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header llamativo -->
+        <div class="header">
+            <h1>🎯 DEBER 1</h1>
+            <p>Sentencia IF - Toma de Decisiones</p>
+            <div class="badge-container">
+                <div class="badge">📚 Ciberseguridad</div>
+                <div class="badge">👨‍💻 William Barrionuevo</div>
+                <div class="badge">⚡ Python</div>
+            </div>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="content">
+            <!-- Grid de ejercicios -->
+            <div class="ejercicios-grid">
+                <!-- Ejercicio 1 -->
+                <div class="ejercicio-card glow">
+                    <div class="ejercicio-numero">
+                        #1 
+                        <span>COMPARACIÓN</span>
+                    </div>
+                    <h2>📌 Pide un número al usuario y muestra si es mayor que 50</h2>
+                    
+                    <div class="code-block">
+                        <code>
+                            <span class="keyword">numero</span> = <span class="function">int</span>(<span class="function">input</span>(<span class="string">"🔢 Ingrese un número: "</span>))<br>
+                            <br>
+                            <span class="keyword">if</span> numero > 50:<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"✅ El número es mayor que 50."</span>)<br>
+                            <span class="keyword">else</span>:<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"❌ El número no es mayor que 50."</span>)
+                        </code>
+                    </div>
+                    
+                    <button class="run-code" onclick="simularEjercicio1()">
+                        ▶️ Probar código
+                    </button>
+                    <div id="resultado1" style="margin-top: 15px; font-weight: bold;"></div>
+                </div>
+
+                <!-- Ejercicio 2 -->
+                <div class="ejercicio-card glow">
+                    <div class="ejercicio-numero">
+                        #2 
+                        <span>EDAD</span>
+                    </div>
+                    <h2>📌 Pide al usuario su edad y muestra si es mayor de edad</h2>
+                    
+                    <div class="code-block">
+                        <code>
+                            <span class="keyword">edad</span> = <span class="function">int</span>(<span class="function">input</span>(<span class="string">"🎂 Ingrese su edad: "</span>))<br>
+                            <span class="keyword">nombre</span> = <span class="function">input</span>(<span class="string">"👤 Ingrese su nombre: "</span>)<br>
+                            <br>
+                            <span class="keyword">if</span> edad >= 18:<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">f"</span>{nombre}<span class="string">, eres mayor de edad ✅"</span>)<br>
+                            <span class="keyword">else</span>:<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">f"</span>{nombre}<span class="string">, no eres mayor de edad ❌"</span>)
+                        </code>
+                    </div>
+                    
+                    <button class="run-code" onclick="simularEjercicio2()">
+                        ▶️ Probar código
+                    </button>
+                    <div id="resultado2" style="margin-top: 15px; font-weight: bold;"></div>
+                </div>
+            </div>
+
+            <!-- Sección explicación mejorada -->
+            <div class="explicacion">
+                <h3>🤔 ¿Qué es la sentencia IF?</h3>
+                <p>
+                    La sentencia <strong>IF</strong> (si en español) es una estructura de control fundamental en programación que permite tomar decisiones basadas en condiciones. Evalúa una expresión y ejecuta un bloque de código solo si la condición se cumple.
+                </p>
+                <div class="explicacion-destacado">
+                    <p>⚡ En Ciberseguridad, IF es esencial para:</p>
+                    <ul style="margin-top: 15px; list-style: none;">
+                        <li>🔐 Validar credenciales de acceso</li>
+                        <li>🛡️ Verificar permisos de usuario</li>
+                        <li>📊 Analizar patrones de tráfico sospechoso</li>
+                        <li>🔒 Controlar autenticación multifactor</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Video container mejorado -->
+            <div class="video-container">
+                <iframe src="https://drive.google.com/file/d/1lMFy06eYD9Z8tCdDQrbOlpcIt4GFnwUh/preview" 
+                        allow="autoplay; encrypted-media" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+
+            <!-- Botones de navegación -->
+            <div class="nav-buttons">
+                <a href="index.html" class="btn btn-secondary">
+                    ← Volver al Inicio
+                </a>
+                <a href="deber2.html" class="btn btn-primary">
+                    Siguiente Deber →
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p class="highlight">⚡ William Barrionuevo ⚡</p>
+            <p>📚 Materia: Ciberseguridad</p>
+            <p>🎯 Deber 1: Sentencia IF - Toma de Decisiones</p>
+            <p style="margin-top: 20px; opacity: 0.7;">© 2024 - Todos los derechos reservados</p>
+        </div>
+    </div>
+
+    <script>
+        // Funciones para simular la ejecución de los ejercicios
+        function simularEjercicio1() {
+            let numero = prompt("🔢 Ingrese un número:");
+            numero = parseInt(numero);
+            
+            let resultado = document.getElementById('resultado1');
+            
+            if (numero > 50) {
+                resultado.innerHTML = "✅ El número " + numero + " es mayor que 50.";
+                resultado.style.color = "#00aa55";
+            } else if (numero <= 50) {
+                resultado.innerHTML = "❌ El número " + numero + " no es mayor que 50.";
+                resultado.style.color = "#ff4444";
+            } else {
+                resultado.innerHTML = "⚠️ Por favor, ingrese un número válido.";
+                resultado.style.color = "#ffaa00";
+            }
+            
+            // Animación del resultado
+            resultado.style.animation = "pulse 0.5s";
+            setTimeout(() => {
+                resultado.style.animation = "";
+            }, 500);
+        }
+
+        function simularEjercicio2() {
+            let nombre = prompt("👤 Ingrese su nombre:");
+            let edad = prompt("🎂 Ingrese su edad:");
+            edad = parseInt(edad);
+            
+            let resultado = document.getElementById('resultado2');
+            
+            if (edad >= 18) {
+                resultado.innerHTML = "✅ " + nombre + ", eres mayor de edad.";
+                resultado.style.color = "#00aa55";
+            } else if (edad < 18 && edad > 0) {
+                resultado.innerHTML = "❌ " + nombre + ", no eres mayor de edad.";
+                resultado.style.color = "#ff4444";
+            } else {
+                resultado.innerHTML = "⚠️ Por favor, ingrese una edad válida.";
+                resultado.style.color = "#ffaa00";
+            }
+            
+            // Animación del resultado
+            resultado.style.animation = "pulse 0.5s";
+            setTimeout(() => {
+                resultado.style.animation = "";
+            }, 500);
+        }
+
+        // Efecto de escritura para el título
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('.header h1');
+            header.style.transition = 'all 0.5s';
+            
+            // Agregar efecto de brillo a las tarjetas al pasar el mouse
+            const cards = document.querySelectorAll('.ejercicio-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-15px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
