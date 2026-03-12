@@ -158,6 +158,81 @@
             font-size: 0.9rem;
         }
 
+        /* SECCIÓN ACTUACIONES EN CLASES */
+        .actuaciones {
+            margin-top: 60px;
+        }
+
+        .actuaciones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .actuacion-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .actuacion-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .actuacion-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #00ff88;
+        }
+
+        .actuacion-fecha {
+            color: #00aa55;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .actuacion-titulo {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .actuacion-descripcion {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .actuacion-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .actuacion-tag {
+            background: #e9e9e9;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .actuacion-tag:hover {
+            background: #00ff88;
+            color: #000;
+        }
+
         /* FOOTER */
         footer {
             background: #1a1a1a;
@@ -195,6 +270,7 @@
             transition: all 0.3s;
             opacity: 0;
             visibility: hidden;
+            z-index: 1000;
         }
 
         .scroll-top.mostrar {
@@ -213,6 +289,7 @@
             .portada h2 { font-size: 1.8rem; }
             .deberes-item { flex-direction: column; text-align: center; }
             .deberes-icono { margin: 0 0 10px 0; }
+            .actuaciones-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -241,7 +318,7 @@
 
             <div class="deberes-item">
                 <span class="deberes-icono">🛡️</span>
-                <a href="deber2.html">Deber 2: Tipos de Amenazas y Vulnerabilidades</a>
+                <a href="deber2.html">Deber 2: Calculadora Basica con operadores logicos</a>
                 <span class="deberes-fecha">Semana 2</span>
             </div>
 
@@ -275,6 +352,78 @@
             <a href="deber1.html" style="display: inline-block; padding: 15px 40px; background: #333; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background 0.3s;" onmouseover="this.style.background='#00aa55'" onmouseout="this.style.background='#333'">
                 VER TODOS LOS DEBERES →
             </a>
+        </div>
+
+        <!-- NUEVA SECCIÓN: ACTUACIONES EN CLASES -->
+        <div class="actuaciones">
+            <h2 class="seccion-titulo">ACTUACIONES EN CLASES</h2>
+            <div class="actuaciones-grid">
+                <div class="actuacion-card">
+                    <div class="actuacion-fecha">📅 15 de Enero, 2024</div>
+                    <h3 class="actuacion-titulo">Análisis de Vulnerabilidades en Redes Locales</h3>
+                    <p class="actuacion-descripcion">Presentación sobre técnicas de escaneo de puertos y detección de vulnerabilidades comunes en redes domésticas y empresariales.</p>
+                    <div class="actuacion-tags">
+                        <span class="actuacion-tag">Nmap</span>
+                        <span class="actuacion-tag">Wireshark</span>
+                        <span class="actuacion-tag">Redes</span>
+                    </div>
+                </div>
+
+                <div class="actuacion-card">
+                    <div class="actuacion-fecha">📅 22 de Enero, 2024</div>
+                    <h3 class="actuacion-titulo">Taller de Criptografía Básica</h3>
+                    <p class="actuacion-descripcion">Demostración práctica de algoritmos de encriptación simétrica y asimétrica, incluyendo ejemplos con AES y RSA.</p>
+                    <div class="actuacion-tags">
+                        <span class="actuacion-tag">AES</span>
+                        <span class="actuacion-tag">RSA</span>
+                        <span class="actuacion-tag">Hash</span>
+                    </div>
+                </div>
+
+                <div class="actuacion-card">
+                    <div class="actuacion-fecha">📅 29 de Enero, 2024</div>
+                    <h3 class="actuacion-titulo">Simulación de Ataque Phishing</h3>
+                    <p class="actuacion-descripcion">Ejercicio práctico demostrando cómo identificar y prevenir ataques de phishing, con ejemplos de correos fraudulentos.</p>
+                    <div class="actuacion-tags">
+                        <span class="actuacion-tag">Phishing</span>
+                        <span class="actuacion-tag">Ingeniería Social</span>
+                        <span class="actuacion-tag">Prevención</span>
+                    </div>
+                </div>
+
+                <div class="actuacion-card">
+                    <div class="actuacion-fecha">📅 5 de Febrero, 2024</div>
+                    <h3 class="actuacion-titulo">Configuración de Firewalls</h3>
+                    <p class="actuacion-descripcion">Implementación de reglas de firewall en Linux usando iptables y configuración de pfSense para protección perimetral.</p>
+                    <div class="actuacion-tags">
+                        <span class="actuacion-tag">iptables</span>
+                        <span class="actuacion-tag">pfSense</span>
+                        <span class="actuacion-tag">Firewall</span>
+                    </div>
+                </div>
+
+                <div class="actuacion-card">
+                    <div class="actuacion-fecha">📅 12 de Febrero, 2024</div>
+                    <h3 class="actuacion-titulo">Análisis de Malware en Sandbox</h3>
+                    <p class="actuacion-descripcion">Demostración de cómo analizar muestras de malware en entornos controlados usando herramientas como Cuckoo Sandbox.</p>
+                    <div class="actuacion-tags">
+                        <span class="actuacion-tag">Malware</span>
+                        <span class="actuacion-tag">Sandbox</span>
+                        <span class="actuacion-tag">Análisis</span>
+                    </div>
+                </div>
+
+                <div class="actuacion-card">
+                    <div class="actuacion-fecha">📅 19 de Febrero, 2024</div>
+                    <h3 class="actuacion-titulo">Seguridad en Aplicaciones Web</h3>
+                    <p class="actuacion-descripcion">Presentación sobre las vulnerabilidades OWASP Top 10 y cómo prevenirlas en el desarrollo de aplicaciones web.</p>
+                    <div class="actuacion-tags">
+                        <span class="actuacion-tag">OWASP</span>
+                        <span class="actuacion-tag">XSS</span>
+                        <span class="actuacion-tag">SQL Injection</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
