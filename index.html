@@ -114,42 +114,6 @@
             margin: 15px auto;
         }
 
-        /* TARJETAS DE INFORMACIÓN */
-        .tarjetas {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 50px 0;
-        }
-
-        .tarjeta {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .tarjeta:hover {
-            transform: translateY(-10px);
-        }
-
-        .tarjeta-icono {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .tarjeta h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #333;
-        }
-
-        .tarjeta p {
-            color: #666;
-            line-height: 1.6;
-        }
-
         /* LISTA DE DEBERES */
         .deberes {
             background: white;
@@ -247,7 +211,6 @@
         @media (max-width: 768px) {
             .portada h1 { font-size: 2.5rem; }
             .portada h2 { font-size: 1.8rem; }
-            .tarjetas { grid-template-columns: 1fr; }
             .deberes-item { flex-direction: column; text-align: center; }
             .deberes-icono { margin: 0 0 10px 0; }
         }
@@ -267,31 +230,6 @@
 
     <!-- CONTENIDO PRINCIPAL -->
     <div class="contenido" id="contenido-principal">
-        
-        <!-- SECCIÓN INFORMACIÓN PERSONAL -->
-        <h2 class="seccion-titulo">INFORMACIÓN</h2>
-        <div class="tarjetas">
-            <div class="tarjeta">
-                <div class="tarjeta-icono">📚</div>
-                <h3>Materia</h3>
-                <p><strong>Ciberseguridad</strong></p>
-                <p>Explorando los fundamentos de la protección digital, análisis de vulnerabilidades y mejores prácticas en seguridad informática.</p>
-            </div>
-
-            <div class="tarjeta">
-                <div class="tarjeta-icono">👨‍💻</div>
-                <h3>Desarrollado Por</h3>
-                <p><strong>William Barrionuevo</strong></p>
-                <p>Estudiante apasionado por la tecnología y la seguridad digital, comprometido con el aprendizaje continuo.</p>
-            </div>
-
-            <div class="tarjeta">
-                <div class="tarjeta-icono">🎯</div>
-                <h3>Objetivos</h3>
-                <p>Dominar técnicas de ethical hacking, protección de datos y seguridad en redes para contribuir a un entorno digital más seguro.</p>
-            </div>
-        </div>
-
         <!-- SECCIÓN DEBERES -->
         <h2 class="seccion-titulo">MIS DEBERES</h2>
         <div class="deberes">
