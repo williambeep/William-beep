@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deber 2 - Bucles - William Barrionuevo</title>
+    <title>Ejercicios de Funciones en Python | William Barrionuevo</title>
     <style>
         * {
             margin: 0;
@@ -68,10 +68,10 @@
             font-size: 1.5rem;
         }
 
-        .ejercicio h3 {
-            color: #333;
-            margin: 15px 0 10px 0;
-            font-size: 1.2rem;
+        .ejercicio p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 1rem;
         }
 
         .codigo {
@@ -100,6 +100,10 @@
 
         .codigo .number {
             color: #b5cea8;
+        }
+
+        .codigo .comment {
+            color: #6a9955;
         }
 
         .ejecutar {
@@ -200,10 +204,6 @@
             padding: 20px;
         }
 
-        button {
-            cursor: pointer;
-        }
-
         @media (max-width: 768px) {
             body {
                 padding: 15px;
@@ -229,18 +229,20 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>📚 Ejercicios de Programación en Python</h1>
-            <p>William Barrionuevo | 10 Ejercicios Resueltos con Bucles</p>
+            <h1>📚 Ejercicios de Funciones en Python</h1>
+            <p>William Barrionuevo | 10 Ejercicios Resueltos con Funciones</p>
         </div>
 
         <div class="content">
             <!-- Ejercicio 1 -->
             <div class="ejercicio">
-                <h2>📌 Ejercicio 1: Números del 1 al 10</h2>
-                <p>Imprime los números del 1 al 10 usando un bucle for.</p>
+                <h2>📌 Ejercicio 1: Mensaje de bienvenida personalizado</h2>
+                <p>Función que muestra un mensaje de bienvenida personalizado.</p>
                 <div class="codigo">
-                    <pre><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(1, 11):
-    <span class="function">print</span>(i)</pre>
+                    <pre><span class="keyword">def</span> <span class="function">bienvenido</span>(nombre):
+    <span class="function">print</span>(<span class="string">"Bienvenido"</span>, nombre)
+
+<span class="function">bienvenido</span>(<span class="string">"William"</span>)</pre>
                 </div>
                 <button class="ejecutar" onclick="ejercicio1()">▶️ Ejecutar</button>
                 <div id="resultado1" class="resultado"></div>
@@ -248,12 +250,16 @@
 
             <!-- Ejercicio 2 -->
             <div class="ejercicio">
-                <h2>📌 Ejercicio 2: Números pares del 1 al 20</h2>
-                <p>Imprime los números pares del 1 al 20.</p>
+                <h2>📌 Ejercicio 2: Número par o impar</h2>
+                <p>Función que determina si un número es par o impar.</p>
                 <div class="codigo">
-                    <pre><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(1, 21):
-    <span class="keyword">if</span> i % 2 == 0:
-        <span class="function">print</span>(i)</pre>
+                    <pre><span class="keyword">def</span> <span class="function">es_par_o_impar</span>(numero):
+    <span class="keyword">if</span> numero % 2 == 0:
+        <span class="keyword">return</span> <span class="string">"Par"</span>
+    <span class="keyword">else</span>:
+        <span class="keyword">return</span> <span class="string">"Impar"</span>
+
+<span class="function">print</span>(<span class="function">es_par_o_impar</span>(7))</pre>
                 </div>
                 <button class="ejecutar" onclick="ejercicio2()">▶️ Ejecutar</button>
                 <div id="resultado2" class="resultado"></div>
@@ -261,12 +267,13 @@
 
             <!-- Ejercicio 3 -->
             <div class="ejercicio">
-                <h2>📌 Ejercicio 3: Tabla de multiplicar</h2>
-                <p>Muestra la tabla de multiplicar del número ingresado.</p>
+                <h2>📌 Ejercicio 3: Suma de dos números</h2>
+                <p>Función que suma dos números.</p>
                 <div class="codigo">
-                    <pre>numero = <span class="function">int</span>(<span class="function">input</span>(<span class="string">"Ingrese un número: "</span>))
-<span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(1, 13):
-    <span class="function">print</span>(f<span class="string">"{numero} x {i} = {numero * i}"</span>)</pre>
+                    <pre><span class="keyword">def</span> <span class="function">suma</span>(num1, num2):
+    <span class="keyword">return</span> num1 + num2
+
+<span class="function">print</span>(<span class="function">suma</span>(3, 6))</pre>
                 </div>
                 <button class="ejecutar" onclick="ejercicio3()">▶️ Ejecutar</button>
                 <div id="resultado3" class="resultado"></div>
@@ -274,11 +281,13 @@
 
             <!-- Ejercicio 4 -->
             <div class="ejercicio">
-                <h2>📌 Ejercicio 4: Números descendentes</h2>
-                <p>Imprime los números del 10 al 1 en orden descendente.</p>
+                <h2>📌 Ejercicio 4: Longitud de una palabra</h2>
+                <p>Función que retorna la longitud de una palabra.</p>
                 <div class="codigo">
-                    <pre><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(10, 0, -1):
-    <span class="function">print</span>(i)</pre>
+                    <pre><span class="keyword">def</span> <span class="function">longitud_palabra</span>(palabra):
+    <span class="keyword">return</span> <span class="function">len</span>(palabra)
+
+<span class="function">print</span>(<span class="function">longitud_palabra</span>(<span class="string">"William"</span>))</pre>
                 </div>
                 <button class="ejecutar" onclick="ejercicio4()">▶️ Ejecutar</button>
                 <div id="resultado4" class="resultado"></div>
@@ -286,14 +295,13 @@
 
             <!-- Ejercicio 5 -->
             <div class="ejercicio">
-                <h2>📌 Ejercicio 5: Suma acumulada</h2>
-                <p>Suma acumulada desde el 1 hasta un número dado.</p>
+                <h2>📌 Ejercicio 5: Cuadrado de un número</h2>
+                <p>Función que calcula el cuadrado de un número.</p>
                 <div class="codigo">
-                    <pre>numero = <span class="function">int</span>(<span class="function">input</span>(<span class="string">"Ingrese un número: "</span>))
-suma = 0
-<span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(1, numero + 1):
-    suma += i
-<span class="function">print</span>(f<span class="string">"La suma es: {suma}"</span>)</pre>
+                    <pre><span class="keyword">def</span> <span class="function">cuadrado</span>(numero):
+    <span class="keyword">return</span> numero ** 2
+
+<span class="function">print</span>(<span class="function">cuadrado</span>(7))</pre>
                 </div>
                 <button class="ejecutar" onclick="ejercicio5()">▶️ Ejecutar</button>
                 <div id="resultado5" class="resultado"></div>
@@ -301,15 +309,13 @@ suma = 0
 
             <!-- Ejercicio 6 -->
             <div class="ejercicio">
-                <h2>📌 Ejercicio 6: Contar vocales</h2>
-                <p>Cuenta cuántas vocales hay en una palabra.</p>
+                <h2>📌 Ejercicio 6: Mayor de tres números</h2>
+                <p>Función que encuentra el mayor de tres números.</p>
                 <div class="codigo">
-                    <pre>palabra = <span class="function">input</span>(<span class="string">"Ingrese una palabra: "</span>)
-contador = 0
-<span class="keyword">for</span> letra <span class="keyword">in</span> palabra:
-    <span class="keyword">if</span> letra <span class="keyword">in</span> <span class="string">"aeiouAEIOU"</span>:
-        contador += 1
-<span class="function">print</span>(f<span class="string">"La cantidad de vocales es: {contador}"</span>)</pre>
+                    <pre><span class="keyword">def</span> <span class="function">mayor_tres_numeros</span>(num1, num2, num3):
+    <span class="keyword">return</span> <span class="function">max</span>(num1, num2, num3)
+
+<span class="function">print</span>(<span class="function">mayor_tres_numeros</span>(2, 6, 9))</pre>
                 </div>
                 <button class="ejecutar" onclick="ejercicio6()">▶️ Ejecutar</button>
                 <div id="resultado6" class="resultado"></div>
@@ -317,18 +323,13 @@ contador = 0
 
             <!-- Ejercicio 7 -->
             <div class="ejercicio">
-                <h2>📌 Ejercicio 7: Validar contraseña</h2>
-                <p>Solicita una contraseña hasta que sea correcta.</p>
+                <h2>📌 Ejercicio 7: Celsius a Fahrenheit</h2>
+                <p>Función que convierte grados Celsius a Fahrenheit.</p>
                 <div class="codigo">
-                    <pre>clave_correcta = <span class="string">"William12345"</span>
-clave = <span class="string">""</span>
+                    <pre><span class="keyword">def</span> <span class="function">celsius_a_fahrenheit</span>(celsius):
+    <span class="keyword">return</span> (celsius * 9/5) + 32
 
-<span class="keyword">while</span> clave != clave_correcta:
-    clave = <span class="function">input</span>(<span class="string">"Ingrese la contraseña: "</span>)
-    <span class="keyword">if</span> clave != clave_correcta:
-        <span class="function">print</span>(<span class="string">"Incorrecta, intente de nuevo"</span>)
-
-<span class="function">print</span>(<span class="string">"Acceso autorizado."</span>)</pre>
+<span class="function">print</span>(<span class="function">celsius_a_fahrenheit</span>(30))</pre>
                 </div>
                 <button class="ejecutar" onclick="ejercicio7()">▶️ Ejecutar</button>
                 <div id="resultado7" class="resultado"></div>
@@ -336,12 +337,13 @@ clave = <span class="string">""</span>
 
             <!-- Ejercicio 8 -->
             <div class="ejercicio">
-                <h2>📌 Ejercicio 8: Múltiplos de 5</h2>
-                <p>Muestra los múltiplos de 5 del 1 al 50.</p>
+                <h2>📌 Ejercicio 8: Suma de una lista</h2>
+                <p>Función que suma todos los elementos de una lista.</p>
                 <div class="codigo">
-                    <pre><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(1, 51):
-    <span class="keyword">if</span> i % 5 == 0:
-        <span class="function">print</span>(i)</pre>
+                    <pre><span class="keyword">def</span> <span class="function">suma_lista</span>(lista):
+    <span class="keyword">return</span> <span class="function">sum</span>(lista)
+
+<span class="function">print</span>(<span class="function">suma_lista</span>([2, 4, 6, 7, 8, 8]))</pre>
                 </div>
                 <button class="ejecutar" onclick="ejercicio8()">▶️ Ejecutar</button>
                 <div id="resultado8" class="resultado"></div>
@@ -349,17 +351,18 @@ clave = <span class="string">""</span>
 
             <!-- Ejercicio 9 -->
             <div class="ejercicio">
-                <h2>📌 Ejercicio 9: Número mayor</h2>
-                <p>Pide 5 números e indica el mayor.</p>
+                <h2>📌 Ejercicio 9: Número positivo o negativo</h2>
+                <p>Función que determina si un número es positivo o negativo.</p>
                 <div class="codigo">
-                    <pre>mayor = <span class="keyword">None</span>
+                    <pre><span class="keyword">def</span> <span class="function">es_positivo_o_negativo</span>(numero):
+    <span class="keyword">if</span> numero > 0:
+        <span class="keyword">return</span> <span class="string">"Positivo"</span>
+    <span class="keyword">elif</span> numero < 0:
+        <span class="keyword">return</span> <span class="string">"Negativo"</span>
+    <span class="keyword">else</span>:
+        <span class="keyword">return</span> <span class="string">"Cero"</span>
 
-<span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(5):
-    numero = <span class="function">float</span>(<span class="function">input</span>(<span class="string">f"Ingresa el número {i+1}: "</span>))
-    <span class="keyword">if</span> mayor <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">or</span> numero > mayor:
-        mayor = numero
-
-<span class="function">print</span>(f<span class="string">"El número mayor es: {mayor}"</span>)</pre>
+<span class="function">print</span>(<span class="function">es_positivo_o_negativo</span>(5))</pre>
                 </div>
                 <button class="ejecutar" onclick="ejercicio9()">▶️ Ejecutar</button>
                 <div id="resultado9" class="resultado"></div>
@@ -367,35 +370,40 @@ clave = <span class="string">""</span>
 
             <!-- Ejercicio 10 -->
             <div class="ejercicio">
-                <h2>📌 Ejercicio 10: Triángulo de asteriscos</h2>
-                <p>Dibuja un triángulo de asteriscos de 5 filas.</p>
+                <h2>📌 Ejercicio 10: Invertir una palabra</h2>
+                <p>Función que invierte una palabra.</p>
                 <div class="codigo">
-                    <pre><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(1, 6):
-    <span class="function">print</span>(<span class="string">"*"</span> * i)</pre>
+                    <pre><span class="keyword">def</span> <span class="function">invertir_palabra</span>(palabra):
+    <span class="keyword">return</span> palabra[::-1]
+
+<span class="function">print</span>(<span class="function">invertir_palabra</span>(<span class="string">"Hola william"</span>))</pre>
                 </div>
                 <button class="ejecutar" onclick="ejercicio10()">▶️ Ejecutar</button>
                 <div id="resultado10" class="resultado"></div>
             </div>
         </div>
 
-        <!-- Sección de videos (CORREGIDO - Ahora dentro del container) -->
+        <!-- Sección de videos -->
         <div class="videos-section">
             <div class="videos-title">
                 <h2>📹 Videos Explicativos</h2>
                 <p>Material multimedia para reforzar tu aprendizaje</p>
             </div>
             <div class="videos-grid">
-                <!-- Video 1 -->
+                
+                <!-- Video 2 -->
                 <div class="video-container">
-                    <iframe src="https://drive.google.com/file/d/1aMr__XHG6K8JVS3GwH-k5SpRQ_ZygtrS/preview" 
+                    <iframe src="https://drive.google.com/file/d/1I_LeuMncnptQr2srCqmRhOKyiCgTLU9D/preview" 
                             allow="autoplay; encrypted-media" 
                             allowfullscreen>
                     </iframe>
                 </div>
-               
+            </div>
+        </div>
+
         <div class="footer">
             <p>© 2024 - William Barrionuevo | Todos los ejercicios son interactivos</p>
-            <p>📚 Materia: Ciberseguridad | Deber 2: Bucles en Python</p>
+            <p>📚 Materia: Ciberseguridad | Deber: Funciones en Python</p>
         </div>
     </div>
 
@@ -407,145 +415,144 @@ clave = <span class="string">""</span>
         }
 
         function ejercicio1() {
-            let resultado = "";
-            for (let i = 1; i <= 10; i++) {
-                resultado += i + "<br>";
+            let nombre = prompt("👤 Ingrese su nombre:");
+            if (!nombre) {
+                mostrarResultado("resultado1", "❌ Por favor, ingrese un nombre válido.", true);
+                return;
             }
-            mostrarResultado("resultado1", resultado);
+            mostrarResultado("resultado1", `✅ Bienvenido, ${nombre}!`);
         }
 
         function ejercicio2() {
-            let resultado = "";
-            for (let i = 1; i <= 20; i++) {
-                if (i % 2 === 0) {
-                    resultado += i + "<br>";
-                }
-            }
-            mostrarResultado("resultado2", resultado);
-        }
-
-        function ejercicio3() {
-            let numero = prompt("🔢 Ingrese un número para ver su tabla de multiplicar:");
+            let numero = prompt("🔢 Ingrese un número:");
             numero = parseInt(numero);
             
             if (isNaN(numero)) {
-                mostrarResultado("resultado3", "❌ Por favor, ingrese un número válido.", true);
+                mostrarResultado("resultado2", "❌ Por favor, ingrese un número válido.", true);
                 return;
             }
             
-            let resultado = `<strong>Tabla de multiplicar del ${numero}:</strong><br>`;
-            for (let i = 1; i <= 12; i++) {
-                resultado += `${numero} x ${i} = ${numero * i}<br>`;
+            let resultado = numero % 2 === 0 ? "Par" : "Impar";
+            mostrarResultado("resultado2", `✅ El número ${numero} es: <strong>${resultado}</strong>`);
+        }
+
+        function ejercicio3() {
+            let num1 = prompt("🔢 Ingrese el primer número:");
+            let num2 = prompt("🔢 Ingrese el segundo número:");
+            
+            num1 = parseFloat(num1);
+            num2 = parseFloat(num2);
+            
+            if (isNaN(num1) || isNaN(num2)) {
+                mostrarResultado("resultado3", "❌ Por favor, ingrese números válidos.", true);
+                return;
             }
-            mostrarResultado("resultado3", resultado);
+            
+            let suma = num1 + num2;
+            mostrarResultado("resultado3", `✅ La suma de ${num1} + ${num2} = <strong>${suma}</strong>`);
         }
 
         function ejercicio4() {
-            let resultado = "";
-            for (let i = 10; i >= 1; i--) {
-                resultado += i + "<br>";
+            let palabra = prompt("📝 Ingrese una palabra:");
+            
+            if (!palabra) {
+                mostrarResultado("resultado4", "❌ Por favor, ingrese una palabra válida.", true);
+                return;
             }
-            mostrarResultado("resultado4", resultado);
+            
+            let longitud = palabra.length;
+            mostrarResultado("resultado4", `✅ La palabra "${palabra}" tiene <strong>${longitud}</strong> caracter(es).`);
         }
 
         function ejercicio5() {
-            let numero = prompt("🔢 Ingrese un número para sumar desde 1 hasta él:");
-            numero = parseInt(numero);
+            let numero = prompt("🔢 Ingrese un número:");
+            numero = parseFloat(numero);
             
             if (isNaN(numero)) {
                 mostrarResultado("resultado5", "❌ Por favor, ingrese un número válido.", true);
                 return;
             }
             
-            let suma = 0;
-            for (let i = 1; i <= numero; i++) {
-                suma += i;
-            }
-            mostrarResultado("resultado5", `✅ La suma de 1 hasta ${numero} es: <strong>${suma}</strong>`);
+            let cuadrado = numero ** 2;
+            mostrarResultado("resultado5", `✅ El cuadrado de ${numero} es: <strong>${cuadrado}</strong>`);
         }
 
         function ejercicio6() {
-            let palabra = prompt("📝 Ingrese una palabra:");
+            let num1 = prompt("🔢 Ingrese el primer número:");
+            let num2 = prompt("🔢 Ingrese el segundo número:");
+            let num3 = prompt("🔢 Ingrese el tercer número:");
             
-            if (!palabra) {
-                mostrarResultado("resultado6", "❌ Por favor, ingrese una palabra válida.", true);
+            num1 = parseFloat(num1);
+            num2 = parseFloat(num2);
+            num3 = parseFloat(num3);
+            
+            if (isNaN(num1) || isNaN(num2) || isNaN(num3)) {
+                mostrarResultado("resultado6", "❌ Por favor, ingrese números válidos.", true);
                 return;
             }
             
-            let contador = 0;
-            let vocales = "aeiouAEIOU";
-            
-            for (let letra of palabra) {
-                if (vocales.includes(letra)) {
-                    contador++;
-                }
-            }
-            
-            mostrarResultado("resultado6", `✅ La palabra "${palabra}" tiene <strong>${contador}</strong> vocal(es).`);
+            let mayor = Math.max(num1, num2, num3);
+            mostrarResultado("resultado6", `✅ El número mayor entre ${num1}, ${num2} y ${num3} es: <strong>${mayor}</strong>`);
         }
 
         function ejercicio7() {
-            const claveCorrecta = "William12345";
-            let intentos = 0;
-            let clave = "";
+            let celsius = prompt("🌡️ Ingrese la temperatura en Celsius:");
+            celsius = parseFloat(celsius);
             
-            while (clave !== claveCorrecta) {
-                clave = prompt("🔐 Ingrese la contraseña:");
-                intentos++;
-                
-                if (clave === null) {
-                    mostrarResultado("resultado7", "❌ Operación cancelada.", true);
-                    return;
-                }
-                
-                if (clave !== claveCorrecta) {
-                    alert(`❌ Contraseña incorrecta. Intento ${intentos}. Vuelva a intentarlo.`);
-                }
+            if (isNaN(celsius)) {
+                mostrarResultado("resultado7", "❌ Por favor, ingrese una temperatura válida.", true);
+                return;
             }
             
-            mostrarResultado("resultado7", `✅ Acceso autorizado. ¡Bienvenido! (Intentos: ${intentos})`);
+            let fahrenheit = (celsius * 9/5) + 32;
+            mostrarResultado("resultado7", `✅ ${celsius}°C equivale a <strong>${fahrenheit.toFixed(2)}°F</strong>`);
         }
 
         function ejercicio8() {
-            let resultado = "<strong>Múltiplos de 5 del 1 al 50:</strong><br>";
-            for (let i = 1; i <= 50; i++) {
-                if (i % 5 === 0) {
-                    resultado += i + "<br>";
-                }
+            let numeros = prompt("🔢 Ingrese números separados por comas (ej: 2,4,6,7,8,8):");
+            
+            if (!numeros) {
+                mostrarResultado("resultado8", "❌ Por favor, ingrese una lista de números.", true);
+                return;
             }
-            mostrarResultado("resultado8", resultado);
+            
+            let lista = numeros.split(",").map(Number);
+            let suma = lista.reduce((acc, val) => acc + val, 0);
+            
+            mostrarResultado("resultado8", `✅ La suma de [${numeros}] = <strong>${suma}</strong>`);
         }
 
         function ejercicio9() {
-            let mayor = null;
-            let numeros = [];
+            let numero = prompt("🔢 Ingrese un número:");
+            numero = parseFloat(numero);
             
-            for (let i = 1; i <= 5; i++) {
-                let numero = prompt(`🔢 Ingrese el número ${i} de 5:`);
-                numero = parseFloat(numero);
-                
-                if (isNaN(numero)) {
-                    mostrarResultado("resultado9", "❌ Por favor, ingrese números válidos.", true);
-                    return;
-                }
-                
-                numeros.push(numero);
-                
-                if (mayor === null || numero > mayor) {
-                    mayor = numero;
-                }
+            if (isNaN(numero)) {
+                mostrarResultado("resultado9", "❌ Por favor, ingrese un número válido.", true);
+                return;
             }
             
-            mostrarResultado("resultado9", `📊 Números ingresados: ${numeros.join(", ")}<br>✅ El número mayor es: <strong>${mayor}</strong>`);
+            let resultado;
+            if (numero > 0) {
+                resultado = "Positivo";
+            } else if (numero < 0) {
+                resultado = "Negativo";
+            } else {
+                resultado = "Cero";
+            }
+            
+            mostrarResultado("resultado9", `✅ El número ${numero} es: <strong>${resultado}</strong>`);
         }
 
         function ejercicio10() {
-            let resultado = "<strong>Triángulo de asteriscos:</strong><br><pre>";
-            for (let i = 1; i <= 5; i++) {
-                resultado += "*".repeat(i) + "<br>";
+            let palabra = prompt("📝 Ingrese una palabra para invertir:");
+            
+            if (!palabra) {
+                mostrarResultado("resultado10", "❌ Por favor, ingrese una palabra válida.", true);
+                return;
             }
-            resultado += "</pre>";
-            mostrarResultado("resultado10", resultado);
+            
+            let invertida = palabra.split('').reverse().join('');
+            mostrarResultado("resultado10", `✅ Palabra original: "${palabra}"<br>🔄 Palabra invertida: "<strong>${invertida}</strong>"`);
         }
     </script>
 </body>

@@ -1,28 +1,44 @@
-# calculadora basica (suma, resta, multiplicacion, division) 
+# Calculadora básica (suma, resta, multiplicacion, division)
 
-num1 = int(input("Ingrese el primer numero: ")) #pide que el usuario ingrese un numero real
-num2 = int(input("Ingrese el segundo numero: "))      #pide que el usuario ingrese otro numero real
-num3 = int(input("Ingrese el tercer numero: "))   #pide que el usuario ingrese un tercer numero real
-num4 = int(input("Ingrese el cuarto numero: "))   #pide que el usuario ingrese un cuarto numero real
+def menu():
+    print("Calculadora Basica")
+    print("1. Suma")
+    print("2. Resta")
+    print("3. Multiplicacion")
+    print("4. Division")
+    print("5. Salir")
+    return int(input("Sellecione una opcion: "))
 
-operacion = input("Ingrese la operacion (+,-,/,*): ")  #pide al usuario que ingresa que operacion realizar 
+def sumar(num1,num2,num3,num4):
+    print("La suma es: ",num1 + num2 + num3 + num4 )
 
-if operacion == "+":        # si el usuario ingresa el simbolo de suma, se realiza la suma de los 4 numeros ingresados
-    resultado = num1 + num2 + num3 + num4   # imprimira el resultado 
-    
-elif operacion == "-":    # sino el usuario ingresara el simbolo de resta, se realiza la resta de los 4 numeros ingresados
-    resultado = num1 - num2 - num3 - num4
+def restar(num1,num2,num3,num4):
+    print("La resta es: ",num1 - num2 - num3 - num4)
 
-elif operacion == "*":      # sino el usu
-    resultado = num1 * num2 * num3 * num4
+def multiplicar(num1,num2,num3,num4):
+    print("La multiplicacion es: ",num1 * num2 * num3 * num4)
 
-elif operacion == "/":
-    if num2 != 0 and num3 != 0 and num4 != 0:
-        resultado = num1 / num2 / num3 / num4
+def dividir(num1,num2,num3,num4):
+    if num2 == 0 or num3 == 0 or num4 == 0:
+        print("Error: No se puede dividir por cero")
     else:
-        resultado = "Error: No se puede dividir por 0"
+        print("La division es: ",num1 / num2 / num3 / num4)
 
+
+def pedirNumero():
+    return int(input("Ingrese un numero: "))
+
+
+opcion = menu()
+if opcion == 1:
+    sumar(pedirNumero(),pedirNumero(),pedirNumero(),pedirNumero())
+elif opcion == 2:
+    restar(pedirNumero(),pedirNumero(),pedirNumero(),pedirNumero())
+elif opcion == 3:
+    multiplicar(pedirNumero(),pedirNumero(),pedirNumero(),pedirNumero())
+elif opcion == 4:
+    dividir(pedirNumero(),pedirNumero(),pedirNumero(),pedirNumero())
+elif opcion == 5:
+    print("Gracias por utilizar la calculadora")
 else:
-    resultado = "Operacion no valida"
-
-print("El resultado es: ", resultado)
+    print("Error: Opcion no valida")
