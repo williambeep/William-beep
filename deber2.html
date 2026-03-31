@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deber 2 - Bucles - William Barrionuevo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .ejercicio {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s;
+        }
+
+        .ejercicio:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .ejercicio h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .ejercicio h3 {
+            color: #333;
+            margin: 15px 0 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .codigo {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .codigo .keyword {
+            color: #569cd6;
+        }
+
+        .codigo .function {
+            color: #dcdcaa;
+        }
+
+        .codigo .string {
+            color: #ce9178;
+        }
+
+        .codigo .number {
+            color: #b5cea8;
+        }
+
+        .ejecutar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+
+        .ejecutar:hover {
+            transform: scale(1.05);
+        }
+
+        .resultado {
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-family: monospace;
+            display: none;
+        }
+
+        .resultado.show {
+            display: block;
+        }
+
+        .resultado.exito {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .resultado.error {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            .content {
+                padding: 20px;
+            }
+            .ejercicio h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Ejercicios de Programación en Python</h1>
+            <p>William Barrionuevo | 10 Ejercicios Resueltos</p>
+        </div>
+
+        <div class="content">
+            <!-- Ejercicio 1 -->
+            <div class="ejercicio">
+                <h2>📌 Ejercicio 1: Números del 1 al 10</h2>
+                <p>Imprime los números del 1 al 10 usando un bucle for.</p>
+                <div class="codigo">
+                    <pre><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(1, 11):
+    <span class="function">print</span>(i)</pre>
+                </div>
+                <button class="ejecutar" onclick="ejercicio1()">▶️ Ejecutar</button>
+                <div id="resultado1" class="resultado"></div>
+            </div>
+
+            <!-- Ejercicio 2 -->
+            <div class="ejercicio">
+                <h2>📌 Ejercicio 2: Números pares del 1 al 20</h2>
+                <p>Imprime los números pares del 1 al 20.</p>
+                <div class="codigo">
+                    <pre><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(1, 21):
+    <span class="keyword">if</span> i % 2 == 0:
+        <span class="function">print</span>(i)</pre>
+                </div>
+                <button class="ejecutar" onclick="ejercicio2()">▶️ Ejecutar</button>
+                <div id="resultado2" class="resultado"></div>
+            </div>
+
+            <!-- Ejercicio 3 -->
+            <div class="ejercicio">
+                <h2>📌 Ejercicio 3: Tabla de multiplicar</h2>
+                <p>Muestra la tabla de multiplicar del número ingresado.</p>
+                <div class="codigo">
+                    <pre>numero = <span class="function">int</span>(<span class="function">input</span>(<span class="string">"Ingrese un número: "</span>))
+<span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(1, 13):
+    <span class="function">print</span>(f<span class="string">"{numero} x {i} = {numero * i}"</span>)</pre>
+                </div>
+                <button class="ejecutar" onclick="ejercicio3()">▶️ Ejecutar</button>
+                <div id="resultado3" class="resultado"></div>
+            </div>
+
+            <!-- Ejercicio 4 -->
+            <div class="ejercicio">
+                <h2>📌 Ejercicio 4: Números descendentes</h2>
+                <p>Imprime los números del 10 al 1 en orden descendente.</p>
+                <div class="codigo">
+                    <pre><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(10, 0, -1):
+    <span class="function">print</span>(i)</pre>
+                </div>
+                <button class="ejecutar" onclick="ejercicio4()">▶️ Ejecutar</button>
+                <div id="resultado4" class="resultado"></div>
+            </div>
+
+            <!-- Ejercicio 5 -->
+            <div class="ejercicio">
+                <h2>📌 Ejercicio 5: Suma acumulada</h2>
+                <p>Suma acumulada desde el 1 hasta un número dado.</p>
+                <div class="codigo">
+                    <pre>numero = <span class="function">int</span>(<span class="function">input</span>(<span class="string">"Ingrese un número: "</span>))
+suma = 0
+<span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(1, numero + 1):
+    suma += i
+<span class="function">print</span>(f<span class="string">"La suma es: {suma}"</span>)</pre>
+                </div>
+                <button class="ejecutar" onclick="ejercicio5()">▶️ Ejecutar</button>
+                <div id="resultado5" class="resultado"></div>
+            </div>
+
+            <!-- Ejercicio 6 -->
+            <div class="ejercicio">
+                <h2>📌 Ejercicio 6: Contar vocales</h2>
+                <p>Cuenta cuántas vocales hay en una palabra.</p>
+                <div class="codigo">
+                    <pre>palabra = <span class="function">input</span>(<span class="string">"Ingrese una palabra: "</span>)
+contador = 0
+<span class="keyword">for</span> letra <span class="keyword">in</span> palabra:
+    <span class="keyword">if</span> letra <span class="keyword">in</span> <span class="string">"aeiouAEIOU"</span>:
+        contador += 1
+<span class="function">print</span>(f<span class="string">"La cantidad de vocales es: {contador}"</span>)</pre>
+                </div>
+                <button class="ejecutar" onclick="ejercicio6()">▶️ Ejecutar</button>
+                <div id="resultado6" class="resultado"></div>
+            </div>
+
+            <!-- Ejercicio 7 -->
+            <div class="ejercicio">
+                <h2>📌 Ejercicio 7: Validar contraseña</h2>
+                <p>Solicita una contraseña hasta que sea correcta.</p>
+                <div class="codigo">
+                    <pre>clave_correcta = <span class="string">"William12345"</span>
+clave = <span class="string">""</span>
+
+<span class="keyword">while</span> clave != clave_correcta:
+    clave = <span class="function">input</span>(<span class="string">"Ingrese la contraseña: "</span>)
+    <span class="keyword">if</span> clave != clave_correcta:
+        <span class="function">print</span>(<span class="string">"Incorrecta, intente de nuevo"</span>)
+
+<span class="function">print</span>(<span class="string">"Acceso autorizado."</span>)</pre>
+                </div>
+                <button class="ejecutar" onclick="ejercicio7()">▶️ Ejecutar</button>
+                <div id="resultado7" class="resultado"></div>
+            </div>
+
+            <!-- Ejercicio 8 -->
+            <div class="ejercicio">
+                <h2>📌 Ejercicio 8: Múltiplos de 5</h2>
+                <p>Muestra los múltiplos de 5 del 1 al 50.</p>
+                <div class="codigo">
+                    <pre><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(1, 51):
+    <span class="keyword">if</span> i % 5 == 0:
+        <span class="function">print</span>(i)</pre>
+                </div>
+                <button class="ejecutar" onclick="ejercicio8()">▶️ Ejecutar</button>
+                <div id="resultado8" class="resultado"></div>
+            </div>
+
+            <!-- Ejercicio 9 -->
+            <div class="ejercicio">
+                <h2>📌 Ejercicio 9: Número mayor</h2>
+                <p>Pide 5 números e indica el mayor.</p>
+                <div class="codigo">
+                    <pre>mayor = <span class="keyword">None</span>
+
+<span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(5):
+    numero = <span class="function">float</span>(<span class="function">input</span>(<span class="string">f"Ingresa el número {i+1}: "</span>))
+    <span class="keyword">if</span> mayor <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">or</span> numero > mayor:
+        mayor = numero
+
+<span class="function">print</span>(f<span class="string">"El número mayor es: {mayor}"</span>)</pre>
+                </div>
+                <button class="ejecutar" onclick="ejercicio9()">▶️ Ejecutar</button>
+                <div id="resultado9" class="resultado"></div>
+            </div>
+
+            <!-- Ejercicio 10 -->
+            <div class="ejercicio">
+                <h2>📌 Ejercicio 10: Triángulo de asteriscos</h2>
+                <p>Dibuja un triángulo de asteriscos de 5 filas.</p>
+                <div class="codigo">
+                    <pre><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(1, 6):
+    <span class="function">print</span>(<span class="string">"*"</span> * i)</pre>
+                </div>
+                <button class="ejecutar" onclick="ejercicio10()">▶️ Ejecutar</button>
+                <div id="resultado10" class="resultado"></div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2024 - William Barrionuevo | Todos los ejercicios son interactivos</p>
+        </div>
+    </div>
+
+    <script>
+        function mostrarResultado(id, mensaje, esError = false) {
+            const elemento = document.getElementById(id);
+            elemento.innerHTML = mensaje;
+            elemento.className = `resultado show ${esError ? 'error' : 'exito'}`;
+        }
+
+        function ejercicio1() {
+            let resultado = "";
+            for (let i = 1; i <= 10; i++) {
+                resultado += i + "<br>";
+            }
+            mostrarResultado("resultado1", resultado);
+        }
+
+        function ejercicio2() {
+            let resultado = "";
+            for (let i = 1; i <= 20; i++) {
+                if (i % 2 === 0) {
+                    resultado += i + "<br>";
+                }
+            }
+            mostrarResultado("resultado2", resultado);
+        }
+
+        function ejercicio3() {
+            let numero = prompt("🔢 Ingrese un número para ver su tabla de multiplicar:");
+            numero = parseInt(numero);
+            
+            if (isNaN(numero)) {
+                mostrarResultado("resultado3", "❌ Por favor, ingrese un número válido.", true);
+                return;
+            }
+            
+            let resultado = `<strong>Tabla de multiplicar del ${numero}:</strong><br>`;
+            for (let i = 1; i <= 12; i++) {
+                resultado += `${numero} x ${i} = ${numero * i}<br>`;
+            }
+            mostrarResultado("resultado3", resultado);
+        }
+
+        function ejercicio4() {
+            let resultado = "";
+            for (let i = 10; i >= 1; i--) {
+                resultado += i + "<br>";
+            }
+            mostrarResultado("resultado4", resultado);
+        }
+
+        function ejercicio5() {
+            let numero = prompt("🔢 Ingrese un número para sumar desde 1 hasta él:");
+            numero = parseInt(numero);
+            
+            if (isNaN(numero)) {
+                mostrarResultado("resultado5", "❌ Por favor, ingrese un número válido.", true);
+                return;
+            }
+            
+            let suma = 0;
+            for (let i = 1; i <= numero; i++) {
+                suma += i;
+            }
+            mostrarResultado("resultado5", `✅ La suma de 1 hasta ${numero} es: <strong>${suma}</strong>`);
+        }
+
+        function ejercicio6() {
+            let palabra = prompt("📝 Ingrese una palabra:");
+            
+            if (!palabra) {
+                mostrarResultado("resultado6", "❌ Por favor, ingrese una palabra válida.", true);
+                return;
+            }
+            
+            let contador = 0;
+            let vocales = "aeiouAEIOU";
+            
+            for (let letra of palabra) {
+                if (vocales.includes(letra)) {
+                    contador++;
+                }
+            }
+            
+            mostrarResultado("resultado6", `✅ La palabra "${palabra}" tiene <strong>${contador}</strong> vocal(es).`);
+        }
+
+        function ejercicio7() {
+            const claveCorrecta = "William12345";
+            let intentos = 0;
+            let clave = "";
+            
+            while (clave !== claveCorrecta) {
+                clave = prompt("🔐 Ingrese la contraseña:");
+                intentos++;
+                
+                if (clave === null) {
+                    mostrarResultado("resultado7", "❌ Operación cancelada.", true);
+                    return;
+                }
+                
+                if (clave !== claveCorrecta) {
+                    alert(`❌ Contraseña incorrecta. Intento ${intentos}. Vuelva a intentarlo.`);
+                }
+            }
+            
+            mostrarResultado("resultado7", `✅ Acceso autorizado. ¡Bienvenido! (Intentos: ${intentos})`);
+        }
+
+        function ejercicio8() {
+            let resultado = "<strong>Múltiplos de 5 del 1 al 50:</strong><br>";
+            for (let i = 1; i <= 50; i++) {
+                if (i % 5 === 0) {
+                    resultado += i + "<br>";
+                }
+            }
+            mostrarResultado("resultado8", resultado);
+        }
+
+        function ejercicio9() {
+            let mayor = null;
+            let numeros = [];
+            
+            for (let i = 1; i <= 5; i++) {
+                let numero = prompt(`🔢 Ingrese el número ${i} de 5:`);
+                numero = parseFloat(numero);
+                
+                if (isNaN(numero)) {
+                    mostrarResultado("resultado9", "❌ Por favor, ingrese números válidos.", true);
+                    return;
+                }
+                
+                numeros.push(numero);
+                
+                if (mayor === null || numero > mayor) {
+                    mayor = numero;
+                }
+            }
+            
+            mostrarResultado("resultado9", `📊 Números ingresados: ${numeros.join(", ")}<br>✅ El número mayor es: <strong>${mayor}</strong>`);
+        }
+
+        function ejercicio10() {
+            let resultado = "<strong>Triángulo de asteriscos:</strong><br><pre>";
+            for (let i = 1; i <= 5; i++) {
+                resultado += "*".repeat(i) + "<br>";
+            }
+            resultado += "</pre>";
+            mostrarResultado("resultado10", resultado);
+        }
+    </script>
+</body>
+</html>
