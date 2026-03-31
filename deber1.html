@@ -20,7 +20,6 @@
             overflow-x: hidden;
         }
 
-        /* Efecto de fondo animado */
         body::before {
             content: '';
             position: absolute;
@@ -39,9 +38,8 @@
             100% { background-position: 200px 200px; }
         }
 
-        /* Contenedor principal con efecto glassmorphism */
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -64,7 +62,6 @@
             }
         }
 
-        /* Encabezado con gradiente animado */
         .header {
             background: linear-gradient(45deg, #4158D0, #C850C0, #FFCC70);
             background-size: 200% 200%;
@@ -132,6 +129,7 @@
             margin-top: 20px;
             position: relative;
             z-index: 1;
+            flex-wrap: wrap;
         }
 
         .badge {
@@ -145,25 +143,18 @@
             animation: float 3s ease infinite;
         }
 
-        .badge:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-
-        .badge:nth-child(3) {
-            animation-delay: 1s;
-        }
+        .badge:nth-child(2) { animation-delay: 0.5s; }
+        .badge:nth-child(3) { animation-delay: 1s; }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-5px); }
         }
 
-        /* Contenido principal */
         .content {
             padding: 50px;
         }
 
-        /* Tarjetas de ejercicios */
         .ejercicios-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
@@ -205,7 +196,7 @@
         }
 
         .ejercicio-numero {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: bold;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
@@ -214,10 +205,11 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .ejercicio-numero span {
-            font-size: 1.2rem;
+            font-size: 1rem;
             background: #667eea;
             color: white;
             padding: 5px 15px;
@@ -226,13 +218,12 @@
         }
 
         .ejercicio-card h2 {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             color: #333;
             margin-bottom: 25px;
             line-height: 1.4;
         }
 
-        /* Bloque de código mejorado */
         .code-block {
             background: #1a1a1a;
             border-radius: 20px;
@@ -260,28 +251,17 @@
         .code-block code {
             color: #fff;
             font-family: 'Courier New', monospace;
-            font-size: 1.1rem;
-            line-height: 1.8;
+            font-size: 0.95rem;
+            line-height: 1.6;
             display: block;
+            white-space: pre-wrap;
         }
 
-        .code-block .keyword {
-            color: #ff79c6;
-        }
+        .keyword { color: #ff79c6; }
+        .function { color: #50fa7b; }
+        .string { color: #f1fa8c; }
+        .comment { color: #6272a4; }
 
-        .code-block .function {
-            color: #50fa7b;
-        }
-
-        .code-block .string {
-            color: #f1fa8c;
-        }
-
-        .code-block .comment {
-            color: #6272a4;
-        }
-
-        /* Ejecutar código botón */
         .run-code {
             display: inline-flex;
             align-items: center;
@@ -303,7 +283,6 @@
             box-shadow: 0 5px 15px rgba(0,255,136,0.4);
         }
 
-        /* Sección de explicación */
         .explicacion {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 30px;
@@ -325,19 +304,19 @@
         }
 
         .explicacion h3 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
         }
 
         .explicacion p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             line-height: 1.8;
             opacity: 0.95;
         }
 
         .explicacion-destacado {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: bold;
             background: rgba(255,255,255,0.2);
             padding: 20px;
@@ -347,7 +326,15 @@
             border: 1px solid rgba(255,255,255,0.3);
         }
 
-        /* Video container */
+        .explicacion-destacado ul {
+            margin-top: 15px;
+            list-style: none;
+        }
+
+        .explicacion-destacado li {
+            margin: 10px 0;
+        }
+
         .video-container {
             margin: 40px 0;
             border-radius: 30px;
@@ -378,7 +365,6 @@
             display: block;
         }
 
-        /* Botones de navegación */
         .nav-buttons {
             display: flex;
             justify-content: space-between;
@@ -414,9 +400,7 @@
             transition: left 0.5s;
         }
 
-        .btn:hover::before {
-            left: 100%;
-        }
+        .btn:hover::before { left: 100%; }
 
         .btn-primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -435,7 +419,6 @@
             color: white;
         }
 
-        /* Footer mejorado */
         .footer {
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             color: white;
@@ -469,49 +452,16 @@
             font-size: 1.3rem;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 3rem;
-            }
-            
-            .header p {
-                font-size: 1.3rem;
-            }
-            
-            .content {
-                padding: 25px;
-            }
-            
-            .ejercicios-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .badge-container {
-                flex-direction: column;
-            }
-            
-            .nav-buttons {
-                flex-direction: column;
-            }
-            
-            .btn {
-                justify-content: center;
-            }
-            
-            iframe {
-                height: 300px;
-            }
-        }
-
-        /* Animaciones adicionales */
-        .floating {
-            animation: floating 3s ease infinite;
-        }
-
-        @keyframes floating {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            body { padding: 15px; }
+            .header h1 { font-size: 2.5rem; }
+            .header p { font-size: 1.2rem; }
+            .content { padding: 25px; }
+            .ejercicios-grid { grid-template-columns: 1fr; }
+            .badge-container { flex-direction: column; }
+            .nav-buttons { flex-direction: column; }
+            .btn { justify-content: center; }
+            iframe { height: 250px; }
         }
 
         .glow {
@@ -522,11 +472,18 @@
             0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.3); }
             50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.6); }
         }
+
+        .resultado {
+            margin-top: 15px;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 10px;
+            background: #f5f5f5;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header llamativo -->
         <div class="header">
             <h1>🎯 DEBER 1</h1>
             <p>Sentencia IF - Toma de Decisiones</p>
@@ -534,66 +491,190 @@
                 <div class="badge">📚 Ciberseguridad</div>
                 <div class="badge">👨‍💻 William Barrionuevo</div>
                 <div class="badge">⚡ Python</div>
+                <div class="badge">🔢 10 Ejercicios</div>
             </div>
         </div>
 
-        <!-- Contenido principal -->
         <div class="content">
-            <!-- Grid de ejercicios -->
             <div class="ejercicios-grid">
-                <!-- Ejercicio 1 -->
+                <!-- Ejercicio 1: Mayor que 50 -->
                 <div class="ejercicio-card glow">
-                    <div class="ejercicio-numero">
-                        #1 
-                        <span>COMPARACIÓN</span>
-                    </div>
+                    <div class="ejercicio-numero">#1 <span>COMPARACIÓN</span></div>
                     <h2>📌 Pide un número al usuario y muestra si es mayor que 50</h2>
-                    
                     <div class="code-block">
                         <code>
-                            <span class="keyword">numero</span> = <span class="function">int</span>(<span class="function">input</span>(<span class="string">"🔢 Ingrese un número: "</span>))<br>
-                            <br>
-                            <span class="keyword">if</span> numero > 50:<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"✅ El número es mayor que 50."</span>)<br>
-                            <span class="keyword">else</span>:<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"❌ El número no es mayor que 50."</span>)
+<span class="keyword">numero</span> = <span class="function">int</span>(<span class="function">input</span>(<span class="string">"Ingrese un número: "</span>))
+<span class="keyword">if</span> numero > 50:
+    <span class="function">print</span>(<span class="string">"El número es mayor que 50."</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"El número no es mayor que 50."</span>)
                         </code>
                     </div>
-                    
-                    <button class="run-code" onclick="simularEjercicio1()">
-                        ▶️ Probar código
-                    </button>
-                    <div id="resultado1" style="margin-top: 15px; font-weight: bold;"></div>
+                    <button class="run-code" onclick="ejercicio1()">▶️ Probar código</button>
+                    <div id="resultado1" class="resultado"></div>
                 </div>
 
-                <!-- Ejercicio 2 -->
+                <!-- Ejercicio 2: Mayor de edad -->
                 <div class="ejercicio-card glow">
-                    <div class="ejercicio-numero">
-                        #2 
-                        <span>EDAD</span>
-                    </div>
-                    <h2>📌 Pide al usuario su edad y muestra si es mayor de edad</h2>
-                    
+                    <div class="ejercicio-numero">#2 <span>EDAD</span></div>
+                    <h2>📌 Pide la edad y muestra si es mayor de edad</h2>
                     <div class="code-block">
                         <code>
-                            <span class="keyword">edad</span> = <span class="function">int</span>(<span class="function">input</span>(<span class="string">"🎂 Ingrese su edad: "</span>))<br>
-                            <span class="keyword">nombre</span> = <span class="function">input</span>(<span class="string">"👤 Ingrese su nombre: "</span>)<br>
-                            <br>
-                            <span class="keyword">if</span> edad >= 18:<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">f"</span>{nombre}<span class="string">, eres mayor de edad ✅"</span>)<br>
-                            <span class="keyword">else</span>:<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(<span class="string">f"</span>{nombre}<span class="string">, no eres mayor de edad ❌"</span>)
+<span class="keyword">edad</span> = <span class="function">int</span>(<span class="function">input</span>(<span class="string">"Ingrese su edad: "</span>))
+<span class="keyword">nombre</span> = <span class="function">input</span>(<span class="string">"Ingrese su nombre: "</span>)
+<span class="keyword">if</span> edad >= 18:
+    <span class="function">print</span>(<span class="string">f"</span>{nombre}<span class="string">, eres mayor de edad"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">f"</span>{nombre}<span class="string">, no eres mayor de edad"</span>)
                         </code>
                     </div>
-                    
-                    <button class="run-code" onclick="simularEjercicio2()">
-                        ▶️ Probar código
-                    </button>
-                    <div id="resultado2" style="margin-top: 15px; font-weight: bold;"></div>
+                    <button class="run-code" onclick="ejercicio2()">▶️ Probar código</button>
+                    <div id="resultado2" class="resultado"></div>
+                </div>
+
+                <!-- Ejercicio 3: Múltiplo de 3 -->
+                <div class="ejercicio-card glow">
+                    <div class="ejercicio-numero">#3 <span>MÚLTIPLO</span></div>
+                    <h2>📌 Pide un número y verifica si es múltiplo de 3</h2>
+                    <div class="code-block">
+                        <code>
+<span class="keyword">numero</span> = <span class="function">int</span>(<span class="function">input</span>(<span class="string">"Ingresa un número: "</span>))
+<span class="keyword">if</span> numero % 3 == 0:
+    <span class="function">print</span>(<span class="string">"Es múltiplo de 3"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"No es múltiplo de 3"</span>)
+                        </code>
+                    </div>
+                    <button class="run-code" onclick="ejercicio3()">▶️ Probar código</button>
+                    <div id="resultado3" class="resultado"></div>
+                </div>
+
+                <!-- Ejercicio 4: Validar contraseña -->
+                <div class="ejercicio-card glow">
+                    <div class="ejercicio-numero">#4 <span>CONTRASEÑA</span></div>
+                    <h2>📌 Prueba una contraseña y comprueba si es correcta</h2>
+                    <div class="code-block">
+                        <code>
+<span class="keyword">clave</span> = <span class="function">input</span>(<span class="string">"Ingresa la contraseña: "</span>)
+<span class="keyword">if</span> clave == <span class="string">"William12345"</span>:
+    <span class="function">print</span>(<span class="string">"Acceso correcto"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"Acceso denegado"</span>)
+                        </code>
+                    </div>
+                    <button class="run-code" onclick="ejercicio4()">▶️ Probar código</button>
+                    <div id="resultado4" class="resultado"></div>
+                </div>
+
+                <!-- Ejercicio 5: Aprobado o Reprobado -->
+                <div class="ejercicio-card glow">
+                    <div class="ejercicio-numero">#5 <span>NOTA</span></div>
+                    <h2>📌 Pide una nota y muestra si está aprobado o reprobado</h2>
+                    <div class="code-block">
+                        <code>
+<span class="keyword">nota</span> = <span class="function">float</span>(<span class="function">input</span>(<span class="string">"Ingrese su nota: "</span>))
+<span class="keyword">if</span> nota >= 7:
+    <span class="function">print</span>(<span class="string">"Está aprobado"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"Está reprobado"</span>)
+                        </code>
+                    </div>
+                    <button class="run-code" onclick="ejercicio5()">▶️ Probar código</button>
+                    <div id="resultado5" class="resultado"></div>
+                </div>
+
+                <!-- Ejercicio 6: Mayor de dos números -->
+                <div class="ejercicio-card glow">
+                    <div class="ejercicio-numero">#6 <span>COMPARACIÓN</span></div>
+                    <h2>📌 Pide dos números y muestra cuál es mayor</h2>
+                    <div class="code-block">
+                        <code>
+<span class="keyword">num1</span> = <span class="function">float</span>(<span class="function">input</span>(<span class="string">"Ingresa un número: "</span>))
+<span class="keyword">num2</span> = <span class="function">float</span>(<span class="function">input</span>(<span class="string">"Ingresa otro número: "</span>))
+<span class="keyword">if</span> num1 > num2:
+    <span class="function">print</span>(<span class="string">"El primer número es mayor"</span>)
+<span class="keyword">elif</span> num2 > num1:
+    <span class="function">print</span>(<span class="string">"El segundo número es mayor"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"Los números son iguales"</span>)
+                        </code>
+                    </div>
+                    <button class="run-code" onclick="ejercicio6()">▶️ Probar código</button>
+                    <div id="resultado6" class="resultado"></div>
+                </div>
+
+                <!-- Ejercicio 7: Positivo, negativo o cero -->
+                <div class="ejercicio-card glow">
+                    <div class="ejercicio-numero">#7 <span>SIGNO</span></div>
+                    <h2>📌 Determina si un número es positivo, negativo o cero</h2>
+                    <div class="code-block">
+                        <code>
+<span class="keyword">numero</span> = <span class="function">float</span>(<span class="function">input</span>(<span class="string">"Ingrese un número: "</span>))
+<span class="keyword">if</span> numero > 0:
+    <span class="function">print</span>(<span class="string">"El número es positivo"</span>)
+<span class="keyword">elif</span> numero < 0:
+    <span class="function">print</span>(<span class="string">"El número es negativo"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"El número es cero"</span>)
+                        </code>
+                    </div>
+                    <button class="run-code" onclick="ejercicio7()">▶️ Probar código</button>
+                    <div id="resultado7" class="resultado"></div>
+                </div>
+
+                <!-- Ejercicio 8: Vocal o consonante -->
+                <div class="ejercicio-card glow">
+                    <div class="ejercicio-numero">#8 <span>VOCAL</span></div>
+                    <h2>📌 Pide una letra e indica si es vocal</h2>
+                    <div class="code-block">
+                        <code>
+<span class="keyword">letra</span> = <span class="function">input</span>(<span class="string">"Ingrese una letra: "</span>)
+<span class="keyword">if</span> letra <span class="keyword">in</span> <span class="string">"aeiouAEIOU"</span>:
+    <span class="function">print</span>(<span class="string">"Es una vocal"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"No es vocal"</span>)
+                        </code>
+                    </div>
+                    <button class="run-code" onclick="ejercicio8()">▶️ Probar código</button>
+                    <div id="resultado8" class="resultado"></div>
+                </div>
+
+                <!-- Ejercicio 9: Temperatura frío/calor -->
+                <div class="ejercicio-card glow">
+                    <div class="ejercicio-numero">#9 <span>CLIMA</span></div>
+                    <h2>📌 Pide una temperatura y muestra si hace frío (menos de 12°C)</h2>
+                    <div class="code-block">
+                        <code>
+<span class="keyword">temperatura</span> = <span class="function">float</span>(<span class="function">input</span>(<span class="string">"Ingrese la temperatura: "</span>))
+<span class="keyword">if</span> temperatura < 12:
+    <span class="function">print</span>(<span class="string">"Está haciendo frío"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"No está haciendo frío"</span>)
+                        </code>
+                    </div>
+                    <button class="run-code" onclick="ejercicio9()">▶️ Probar código</button>
+                    <div id="resultado9" class="resultado"></div>
+                </div>
+
+                <!-- Ejercicio 10: Año bisiesto -->
+                <div class="ejercicio-card glow">
+                    <div class="ejercicio-numero">#10 <span>BISIESTO</span></div>
+                    <h2>📌 Pide un año e indica si es bisiesto</h2>
+                    <div class="code-block">
+                        <code>
+<span class="keyword">año</span> = <span class="function">int</span>(<span class="function">input</span>(<span class="string">"Ingresa un año: "</span>))
+<span class="keyword">if</span> año % 4 == 0:
+    <span class="function">print</span>(<span class="string">"Es un año bisiesto"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"No es bisiesto"</span>)
+                        </code>
+                    </div>
+                    <button class="run-code" onclick="ejercicio10()">▶️ Probar código</button>
+                    <div id="resultado10" class="resultado"></div>
                 </div>
             </div>
 
-            <!-- Sección explicación mejorada -->
+            <!-- Sección explicación -->
             <div class="explicacion">
                 <h3>🤔 ¿Qué es la sentencia IF?</h3>
                 <p>
@@ -601,7 +682,7 @@
                 </p>
                 <div class="explicacion-destacado">
                     <p>⚡ En Ciberseguridad, IF es esencial para:</p>
-                    <ul style="margin-top: 15px; list-style: none;">
+                    <ul>
                         <li>🔐 Validar credenciales de acceso</li>
                         <li>🛡️ Verificar permisos de usuario</li>
                         <li>📊 Analizar patrones de tráfico sospechoso</li>
@@ -610,102 +691,128 @@
                 </div>
             </div>
 
-            <!-- Video container mejorado -->
+            <!-- Video  1-->
             <div class="video-container">
                 <iframe src="https://drive.google.com/file/d/1lMFy06eYD9Z8tCdDQrbOlpcIt4GFnwUh/preview" 
                         allow="autoplay; encrypted-media" 
                         allowfullscreen>
                 </iframe>
             </div>
-
+            <!-- Video 2 -->
+            <div class="video-container">
+                <iframe src="https://drive.google.com/file/d/1TnoTx0a2kmGuABpA5kofe7vC4zHCL_LK/preview" 
+                      allow="autoplay; encrypted-media" 
+                    allowfullscreen>
+        </iframe>
+    </div>   
+            <!-- Video 3-->
+            <div class="video-container">
+                <iframe src="https://drive.google.com/file/d/1R-KEfPmCK0tMXsVcnCwJsgb4OhKtkMbD/preview" 
+                      allow="autoplay; encrypted-media" 
+                    allowfullscreen>
+        </iframe>
+    </div>
             <!-- Botones de navegación -->
             <div class="nav-buttons">
-                <a href="index.html" class="btn btn-secondary">
-                    ← Volver al Inicio
-                </a>
-                <a href="deber2.html" class="btn btn-primary">
-                    Siguiente Deber →
-                </a>
+                <a href="index.html" class="btn btn-secondary">← Volver al Inicio</a>
+                <a href="deber2.html" class="btn btn-primary">Siguiente Deber →</a>
             </div>
         </div>
 
-        <!-- Footer -->
         <div class="footer">
             <p class="highlight">⚡ William Barrionuevo ⚡</p>
             <p>📚 Materia: Ciberseguridad</p>
-            <p>🎯 Deber 1: Sentencia IF - Toma de Decisiones</p>
+            <p>🎯 Deber 1: Sentencia IF - Toma de Decisiones (10 Ejercicios)</p>
             <p style="margin-top: 20px; opacity: 0.7;">© 2024 - Todos los derechos reservados</p>
         </div>
     </div>
 
     <script>
-        // Funciones para simular la ejecución de los ejercicios
-        function simularEjercicio1() {
-            let numero = prompt("🔢 Ingrese un número:");
-            numero = parseInt(numero);
-            
-            let resultado = document.getElementById('resultado1');
-            
-            if (numero > 50) {
-                resultado.innerHTML = "✅ El número " + numero + " es mayor que 50.";
-                resultado.style.color = "#00aa55";
-            } else if (numero <= 50) {
-                resultado.innerHTML = "❌ El número " + numero + " no es mayor que 50.";
-                resultado.style.color = "#ff4444";
-            } else {
-                resultado.innerHTML = "⚠️ Por favor, ingrese un número válido.";
-                resultado.style.color = "#ffaa00";
-            }
-            
-            // Animación del resultado
-            resultado.style.animation = "pulse 0.5s";
-            setTimeout(() => {
-                resultado.style.animation = "";
-            }, 500);
+        function mostrarResultado(elementId, mensaje, esExito = true) {
+            const elemento = document.getElementById(elementId);
+            elemento.innerHTML = mensaje;
+            elemento.style.color = esExito ? "#00aa55" : "#ff4444";
+            elemento.style.animation = "pulse 0.5s";
+            setTimeout(() => { elemento.style.animation = ""; }, 500);
         }
 
-        function simularEjercicio2() {
+        function ejercicio1() {
+            let numero = prompt("🔢 Ingrese un número:");
+            numero = parseInt(numero);
+            if (isNaN(numero)) {
+                mostrarResultado("resultado1", "⚠️ Por favor, ingrese un número válido.", false);
+            } else if (numero > 50) {
+                mostrarResultado("resultado1", `✅ El número ${numero} es mayor que 50.`, true);
+            } else {
+                mostrarResultado("resultado1", `❌ El número ${numero} no es mayor que 50.`, false);
+            }
+        }
+
+        function ejercicio2() {
             let nombre = prompt("👤 Ingrese su nombre:");
             let edad = prompt("🎂 Ingrese su edad:");
             edad = parseInt(edad);
-            
-            let resultado = document.getElementById('resultado2');
-            
-            if (edad >= 18) {
-                resultado.innerHTML = "✅ " + nombre + ", eres mayor de edad.";
-                resultado.style.color = "#00aa55";
-            } else if (edad < 18 && edad > 0) {
-                resultado.innerHTML = "❌ " + nombre + ", no eres mayor de edad.";
-                resultado.style.color = "#ff4444";
+            if (isNaN(edad) || !nombre) {
+                mostrarResultado("resultado2", "⚠️ Por favor, ingrese datos válidos.", false);
+            } else if (edad >= 18) {
+                mostrarResultado("resultado2", `✅ ${nombre}, eres mayor de edad.`, true);
             } else {
-                resultado.innerHTML = "⚠️ Por favor, ingrese una edad válida.";
-                resultado.style.color = "#ffaa00";
+                mostrarResultado("resultado2", `❌ ${nombre}, no eres mayor de edad.`, false);
             }
-            
-            // Animación del resultado
-            resultado.style.animation = "pulse 0.5s";
-            setTimeout(() => {
-                resultado.style.animation = "";
-            }, 500);
         }
 
-        // Efecto de escritura para el título
-        document.addEventListener('DOMContentLoaded', function() {
-            const header = document.querySelector('.header h1');
-            header.style.transition = 'all 0.5s';
-            
-            // Agregar efecto de brillo a las tarjetas al pasar el mouse
-            const cards = document.querySelectorAll('.ejercicio-card');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-15px) scale(1.02)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            });
-        });
-    </script>
-</body>
-</html>
+        function ejercicio3() {
+            let numero = prompt("🔢 Ingresa un número:");
+            numero = parseInt(numero);
+            if (isNaN(numero)) {
+                mostrarResultado("resultado3", "⚠️ Por favor, ingrese un número válido.", false);
+            } else if (numero % 3 === 0) {
+                mostrarResultado("resultado3", `✅ El número ${numero} es múltiplo de 3.`, true);
+            } else {
+                mostrarResultado("resultado3", `❌ El número ${numero} no es múltiplo de 3.`, false);
+            }
+        }
+
+        function ejercicio4() {
+            let clave = prompt("🔐 Ingresa la contraseña:");
+            if (clave === "William12345") {
+                mostrarResultado("resultado4", "✅ Acceso correcto. Bienvenido.", true);
+            } else {
+                mostrarResultado("resultado4", "❌ Acceso denegado. Contraseña incorrecta.", false);
+            }
+        }
+
+        function ejercicio5() {
+            let nota = prompt("📝 Ingrese su nota (0-10):");
+            nota = parseFloat(nota);
+            if (isNaN(nota)) {
+                mostrarResultado("resultado5", "⚠️ Por favor, ingrese una nota válida.", false);
+            } else if (nota >= 7) {
+                mostrarResultado("resultado5", `✅ Nota ${nota}: Estás APROBADO.`, true);
+            } else {
+                mostrarResultado("resultado5", `❌ Nota ${nota}: Estás REPROBADO.`, false);
+            }
+        }
+
+        function ejercicio6() {
+            let num1 = prompt("🔢 Ingresa el primer número:");
+            let num2 = prompt("🔢 Ingresa el segundo número:");
+            num1 = parseFloat(num1);
+            num2 = parseFloat(num2);
+            if (isNaN(num1) || isNaN(num2)) {
+                mostrarResultado("resultado6", "⚠️ Por favor, ingrese números válidos.", false);
+            } else if (num1 > num2) {
+                mostrarResultado("resultado6", `✅ El primer número (${num1}) es mayor que el segundo (${num2}).`, true);
+            } else if (num2 > num1) {
+                mostrarResultado("resultado6", `✅ El segundo número (${num2}) es mayor que el primero (${num1}).`, true);
+            } else {
+                mostrarResultado("resultado6", `⚖️ Los números son iguales: ${num1} = ${num2}.`, true);
+            }
+        }
+
+        function ejercicio7() {
+            let numero = prompt("🔢 Ingrese un número:");
+            numero = parseFloat(numero);
+            if (isNaN(numero)) {
+                mostrarResultado("resultado7", "⚠️ Por favor, ingrese un número válido.", false);
+            } else
