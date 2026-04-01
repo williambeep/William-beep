@@ -3,483 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de IMC - Python Tkinter | William Barrionuevo</title>
+    <title>Calculadora Básica</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        
+        .calculadora {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
             box-sizing: border-box;
         }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 30px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        .content {
-            padding: 40px;
-        }
-
-        .info-box {
-            background: #f0f4ff;
-            border-left: 5px solid #667eea;
-            padding: 20px;
-            margin-bottom: 30px;
-            border-radius: 10px;
-        }
-
-        .info-box h3 {
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-
-        .info-box ul {
-            margin-left: 20px;
-            color: #555;
-        }
-
-        .info-box li {
-            margin: 8px 0;
-        }
-
-        .codigo {
-            background: #1e1e1e;
-            color: #d4d4d4;
-            padding: 25px;
-            border-radius: 15px;
-            overflow-x: auto;
-            margin: 20px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .codigo .keyword {
-            color: #569cd6;
-        }
-
-        .codigo .function {
-            color: #dcdcaa;
-        }
-
-        .codigo .string {
-            color: #ce9178;
-        }
-
-        .codigo .comment {
-            color: #6a9955;
-        }
-
-        .codigo .number {
-            color: #b5cea8;
-        }
-
-        .demo {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 25px;
-            margin-top: 30px;
-            border: 2px dashed #667eea;
-        }
-
-        .demo h3 {
-            color: #667eea;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .calculadora-imc {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .campo {
-            margin-bottom: 20px;
-        }
-
-        .campo label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .campo input {
+        
+        button {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        .campo input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .btn-calcular {
-            width: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 12px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: bold;
+            border-radius: 5px;
             cursor: pointer;
-            transition: transform 0.2s;
+            font-size: 16px;
         }
-
-        .btn-calcular:hover {
-            transform: scale(1.02);
+        
+        button:hover {
+            background-color: #45a049;
         }
-
-        .resultado-imc {
+        
+        .resultado {
             margin-top: 20px;
-            padding: 15px;
-            border-radius: 10px;
+            padding: 10px;
+            background-color: #e3f2fd;
+            border-radius: 5px;
             text-align: center;
             font-weight: bold;
-            font-size: 18px;
+            color: #1976d2;
         }
-
-        .resultado-exito {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .resultado-error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .tabla-imc {
-            margin-top: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 15px;
-        }
-
-        .tabla-imc table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .tabla-imc th, .tabla-imc td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .tabla-imc th {
-            background: #667eea;
-            color: white;
-        }
-
-        /* Estilos para la sección de videos */
-        .videos-section {
-            padding: 0 40px 40px 40px;
-            background: white;
-        }
-
-        .videos-title {
+        
+        .error {
+            color: red;
             text-align: center;
-            margin-bottom: 30px;
+            margin-top: 10px;
         }
-
-        .videos-title h2 {
-            font-size: 1.8rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-        }
-
-        .videos-title p {
-            color: #666;
-            font-size: 1rem;
-        }
-
-        .videos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
+        
         .video-container {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            border: 2px solid #667eea;
-            transition: transform 0.3s;
+            margin-top: 30px;
+            text-align: center;
         }
-
-        .video-container:hover {
-            transform: translateY(-5px);
-        }
-
+        
         .video-container iframe {
             width: 100%;
-            height: 220px;
+            height: 200px;
             border: none;
-            display: block;
+            border-radius: 5px;
         }
-
-        .footer {
-            background: #333;
-            color: white;
+        
+        h3 {
             text-align: center;
-            padding: 20px;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 15px;
-            }
-            .content {
-                padding: 20px;
-            }
-            .videos-section {
-                padding: 0 20px 20px 20px;
-            }
-            .codigo {
-                font-size: 11px;
-                padding: 15px;
-            }
-            .videos-grid {
-                grid-template-columns: 1fr;
-            }
-            .video-container iframe {
-                height: 200px;
-            }
+            color: #333;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>⚕️ Calculadora de Índice de Masa Corporal (IMC)</h1>
-            <p>Desarrollado con Python y Tkinter | William Barrionuevo</p>
-        </div>
-
-        <div class="content">
-            <!-- Información sobre el IMC -->
-            <div class="info-box">
-                <h3>📊 ¿Qué es el IMC?</h3>
-                <p>El Índice de Masa Corporal (IMC) es una medida que relaciona el peso y la altura para evaluar si una persona tiene un peso saludable.</p>
-                <br>
-                <h3>📋 Clasificación del IMC:</h3>
-                <ul>
-                    <li><strong>Menos de 18.5:</strong> Peso bajo</li>
-                    <li><strong>18.5 - 24.9:</strong> Peso normal</li>
-                    <li><strong>25.0 - 29.9:</strong> Sobrepeso</li>
-                    <li><strong>30.0 o más:</strong> Obesidad</li>
-                </ul>
-            </div>
-
-            <!-- Código Python -->
-            <div class="codigo">
-                <pre><span class="keyword">import</span> tkinter <span class="keyword">as</span> tk
-<span class="keyword">from</span> tkinter <span class="keyword">import</span> messagebox
-
-<span class="keyword">def</span> <span class="function">calcular_imc</span>():
-    <span class="keyword">try</span>:
-        peso = <span class="function">float</span>(entry_peso.<span class="function">get</span>())
-        altura = <span class="function">float</span>(entry_altura.<span class="function">get</span>())
-
-        <span class="keyword">if</span> altura <= 0:
-            messagebox.<span class="function">showerror</span>(<span class="string">"Error"</span>, <span class="string">"La altura debe ser mayor a cero."</span>)
-            <span class="keyword">return</span>
+    <div class="calculadora">
+        <h2 style="text-align: center;">Calculadora Básica</h2>
         
-        imc = peso / (altura ** 2)
-
-        <span class="keyword">if</span> imc < 18.5:
-            categoria = <span class="string">"Peso bajo"</span>
-        <span class="keyword">elif</span> imc < 25:
-            categoria = <span class="string">"Peso normal"</span>
-        <span class="keyword">elif</span> imc < 30:
-            categoria = <span class="string">"Sobrepeso"</span>
-        <span class="keyword">else</span>:
-            categoria = <span class="string">"Obesidad"</span>
-
-        label_resultado.<span class="function">config</span>(text=<span class="string">f"IMC: {imc:.2f} - {categoria}"</span>)
-
-    <span class="keyword">except</span>:
-        messagebox.<span class="function">showerror</span>(<span class="string">"Error"</span>, <span class="string">"Ingrese valores numéricos válidos"</span>)
-
-<span class="comment"># Crear ventana</span>
-ventana = tk.<span class="function">Tk</span>()
-ventana.<span class="function">title</span>(<span class="string">"Calculadora de IMC"</span>)
-ventana.<span class="function">geometry</span>(<span class="string">"300x200"</span>)
-
-<span class="comment"># Peso</span>
-tk.<span class="function">Label</span>(ventana, text=<span class="string">"Peso (kg):"</span>).<span class="function">pack</span>()
-entry_peso = tk.<span class="function">Entry</span>(ventana)
-entry_peso.<span class="function">pack</span>()
-
-<span class="comment"># Altura</span>
-tk.<span class="function">Label</span>(ventana, text=<span class="string">"Altura (m):"</span>).<span class="function">pack</span>()
-entry_altura = tk.<span class="function">Entry</span>(ventana)
-entry_altura.<span class="function">pack</span>()
-
-<span class="comment"># Botón</span>
-boton_calcular = tk.<span class="function">Button</span>(ventana, text=<span class="string">"Calcular IMC"</span>, command=calcular_imc)
-boton_calcular.<span class="function">pack</span>()
-
-<span class="comment"># Resultado</span>
-label_resultado = tk.<span class="function">Label</span>(ventana, text=<span class="string">""</span>, fg=<span class="string">"blue"</span>)
-label_resultado.<span class="function">pack</span>(pady=10)
-
-ventana.<span class="function">mainloop</span>()</pre>
-            </div>
-
-            <!-- Demostración interactiva en el navegador -->
-            <div class="demo">
-                <h3>🖥️ Versión Interactiva en el Navegador</h3>
-                <div class="calculadora-imc">
-                    <div class="campo">
-                        <label>⚖️ Peso (kg):</label>
-                        <input type="number" id="peso" placeholder="Ejemplo: 70" step="0.1">
-                    </div>
-                    <div class="campo">
-                        <label>📏 Altura (m):</label>
-                        <input type="number" id="altura" placeholder="Ejemplo: 1.75" step="0.01">
-                    </div>
-                    <button class="btn-calcular" onclick="calcularIMCDemo()">Calcular IMC</button>
-                    <div id="resultadoDemo" class="resultado-imc"></div>
-                    
-                    <div class="tabla-imc">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>IMC</th>
-                                    <th>Clasificación</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>Menos de 18.5</td><td>Peso bajo</td></tr>
-                                <tr><td>18.5 - 24.9</td><td>Peso normal</td></tr>
-                                <tr><td>25.0 - 29.9</td><td>Sobrepeso</td></tr>
-                                <tr><td>30.0 o más</td><td>Obesidad</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sección de videos -->
-        <div class="videos-section">
-            <div class="videos-title">
-                <h2>📹 Videos Explicativos</h2>
-                <p>Material multimedia para reforzar tu aprendizaje</p>
-            </div>
-            <div class="videos-grid">
-                <!-- Video 1 -->
-                <div class="video-container">
-                    <iframe src="https://drive.google.com/file/d/1tv9tvHqzFyHKj1VQa8nUtgulGh-FlA_P/preview" 
-                            allow="autoplay; encrypted-media" 
-                            allowfullscreen>
-                    </iframe>
-                </div>
-               
-
-        <div class="footer">
-            <p>© 2024 - William Barrionuevo | Materia: Ciberseguridad</p>
-            <p>Calculadora de IMC desarrollada con Python y Tkinter</p>
-        </div>
+        <label>Número 1:</label>
+        <input type="number" id="num1" placeholder="Ingrese el primer número">
+        
+        <label>Número 2:</label>
+        <input type="number" id="num2" placeholder="Ingrese el segundo número">
+        
+        <button onclick="realizarOperacion('suma')">Sumar</button>
+        <button onclick="realizarOperacion('resta')">Restar</button>
+        <button onclick="realizarOperacion('multiplicacion')">Multiplicar</button>
+        <button onclick="realizarOperacion('division')">Dividir</button>
+        
+        <div id="resultado" class="resultado"></div>
+        <div id="error" class="error"></div>
+    </div>
+    
+    <!-- Video 2 - Movido fuera de la calculadora y del script -->
+    <h3>Video Tutorial</h3>
+    <div class="video-container">
+        <iframe src="https://drive.google.com/file/d/1ggV9OeEjF5ABfCDXulE9xqUoBcgu4MKw/preview" 
+                allow="autoplay; encrypted-media" 
+                allowfullscreen>
+        </iframe>
     </div>
 
     <script>
-        function calcularIMCDemo() {
-            const pesoInput = document.getElementById('peso');
-            const alturaInput = document.getElementById('altura');
-            const resultadoDiv = document.getElementById('resultadoDemo');
+        function realizarOperacion(tipo) {
+            // Limpiar mensajes anteriores
+            document.getElementById('error').textContent = '';
             
-            const peso = parseFloat(pesoInput.value);
-            const altura = parseFloat(alturaInput.value);
+            // Obtener valores
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            const resultadoDiv = document.getElementById('resultado');
             
-            // Validaciones
-            if (isNaN(peso) || isNaN(altura)) {
-                resultadoDiv.innerHTML = '❌ Por favor, ingrese valores numéricos válidos.';
-                resultadoDiv.className = 'resultado-imc resultado-error';
+            // Validar que sean números válidos
+            if (isNaN(num1) || isNaN(num2)) {
+                document.getElementById('error').textContent = 'Error: Ingrese números válidos';
+                resultadoDiv.textContent = '';
                 return;
             }
             
-            if (peso <= 0) {
-                resultadoDiv.innerHTML = '❌ El peso debe ser mayor a cero.';
-                resultadoDiv.className = 'resultado-imc resultado-error';
-                return;
+            let resultado;
+            let operacion;
+            
+            // Realizar operación según el tipo
+            switch(tipo) {
+                case 'suma':
+                    resultado = num1 + num2;
+                    operacion = 'Suma';
+                    break;
+                case 'resta':
+                    resultado = num1 - num2;
+                    operacion = 'Resta';
+                    break;
+                case 'multiplicacion':
+                    resultado = num1 * num2;
+                    operacion = 'Multiplicación';
+                    break;
+                case 'division':
+                    if (num2 === 0) {
+                        document.getElementById('error').textContent = 'Error: No se puede dividir por cero';
+                        resultadoDiv.textContent = '';
+                        return;
+                    }
+                    resultado = num1 / num2;
+                    operacion = 'División';
+                    break;
+                default:
+                    return;
             }
             
-            if (altura <= 0) {
-                resultadoDiv.innerHTML = '❌ La altura debe ser mayor a cero.';
-                resultadoDiv.className = 'resultado-imc resultado-error';
-                return;
-            }
-            
-            // Calcular IMC
-            const imc = peso / (altura ** 2);
-            
-            // Determinar categoría
-            let categoria = '';
-            let color = '';
-            
-            if (imc < 18.5) {
-                categoria = 'Peso bajo';
-                color = '#ffc107';
-            } else if (imc < 25) {
-                categoria = 'Peso normal';
-                color = '#28a745';
-            } else if (imc < 30) {
-                categoria = 'Sobrepeso';
-                color = '#fd7e14';
-            } else {
-                categoria = 'Obesidad';
-                color = '#dc3545';
-            }
-            
-            resultadoDiv.innerHTML = `📊 IMC: <strong>${imc.toFixed(2)}</strong><br>🏷️ Clasificación: <strong style="color: ${color};">${categoria}</strong>`;
-            resultadoDiv.className = 'resultado-imc resultado-exito';
+            // Mostrar resultado
+            resultadoDiv.textContent = `${operacion}: ${num1} ${obtenerSimbolo(tipo)} ${num2} = ${resultado}`;
         }
         
-        // Permitir calcular con Enter
-        document.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                calcularIMCDemo();
+        function obtenerSimbolo(tipo) {
+            switch(tipo) {
+                case 'suma': return '+';
+                case 'resta': return '-';
+                case 'multiplicacion': return '×';
+                case 'division': return '÷';
+                default: return '';
+            }
+        }
+        
+        // Permitir usar la tecla Enter
+        document.getElementById('num1').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                realizarOperacion('suma');
+            }
+        });
+        
+        document.getElementById('num2').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                realizarOperacion('suma');
             }
         });
     </script>
