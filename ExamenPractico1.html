@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen Práctico - Agenda de Tareas | William Barrionuevo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 30px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><text x="10" y="20" font-size="20">if</text><text x="80" y="40" font-size="25">else</text><text x="20" y="80" font-size="30">{ }</text><text x="70" y="90" font-size="22">()</text></svg>');
+            background-size: 200px 200px;
+            animation: moveBackground 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes moveBackground {
+            0% { background-position: 0 0; }
+            100% { background-position: 200px 200px; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            position: relative;
+            animation: slideIn 0.8s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .header {
+            background: linear-gradient(45deg, #4158D0, #C850C0, #FFCC70);
+            background-size: 200% 200%;
+            animation: gradient 5s ease infinite;
+            color: white;
+            padding: 50px;
+            text-align: center;
+            position: relative;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.5rem;
+            opacity: 0.95;
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(5px);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .content {
+            padding: 50px;
+        }
+
+        /* Agenda de Tareas */
+        .agenda-container {
+            background: white;
+            border-radius: 30px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin: 40px 0;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .agenda-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .btn-agenda {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-agregar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-completar {
+            background: #00ff88;
+            color: #1a1a1a;
+        }
+
+        .btn-eliminar {
+            background: #ff4757;
+            color: white;
+        }
+
+        .btn-limpiar {
+            background: #747d8c;
+            color: white;
+        }
+
+        .btn-agenda:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .lista-tareas {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 5px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .tarea-item {
+            background: white;
+            padding: 15px 20px;
+            margin: 10px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 4px solid #667eea;
+        }
+
+        .tarea-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .tarea-item.completada {
+            opacity: 0.6;
+            background: #e8f5e9;
+            border-left-color: #00ff88;
+        }
+
+        .tarea-texto {
+            font-size: 1rem;
+            flex: 1;
+        }
+
+        .tarea-texto.completada {
+            text-decoration: line-through;
+        }
+
+        .tarea-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .tarea-check, .tarea-delete {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .tarea-check:hover {
+            background: #00ff88;
+            transform: scale(1.1);
+        }
+
+        .tarea-delete:hover {
+            background: #ff4757;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .estadisticas {
+            margin-top: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .estadistica-item {
+            text-align: center;
+        }
+
+        .estadistica-numero {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .estadistica-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .code-block {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .explicacion {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 30px;
+            padding: 40px;
+            margin: 40px 0;
+            color: white;
+            position: relative;
+        }
+
+        .explicacion h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .explicacion p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .explicacion-destacado {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 20px;
+            margin-top: 30px;
+        }
+
+        .explicacion-destacado ul {
+            margin-top: 15px;
+            list-style: none;
+        }
+
+        .explicacion-destacado li {
+            margin: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .explicacion-destacado li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00ff88;
+            font-weight: bold;
+        }
+
+        .video-container {
+            margin: 40px 0;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            display: block;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            gap: 20px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 30px;
+            background: white;
+            color: #333;
+            text-decoration: none;
+            border-radius: 60px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 2px solid #667eea;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+        }
+
+        .btn-secondary:hover {
+            transform: translateX(-10px);
+            background: #667eea;
+            color: white;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .footer .highlight {
+            color: #00ff88;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 15px; }
+            .header h1 { font-size: 2rem; }
+            .content { padding: 25px; }
+            .input-group { flex-direction: column; }
+            .button-group { justify-content: center; }
+            iframe { height: 250px; }
+            .nav-buttons { flex-direction: column; }
+            .btn { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Examen Práctico</h1>
+            <p>Agenda de Tareas Diarias</p>
+            <div class="badge-container">
+                <div class="badge">📚 Ciberseguridad</div>
+                <div class="badge">👨‍💻 William Barrionuevo</div>
+                <div class="badge">🐍 Python + Tkinter</div>
+                <div class="badge">✅ Gestión de Tareas</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Agenda de Tareas -->
+            <div class="agenda-container">
+                <div class="agenda-title">
+                    <span>📝</span> Mi Agenda de Tareas
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="tareaInput" placeholder="Escribe una nueva tarea..." onkeypress="handleKeyPress(event)">
+                </div>
+
+                <div class="button-group">
+                    <button class="btn-agenda btn-agregar" onclick="agregarTarea()">➕ Agregar Tarea</button>
+                    <button class="btn-agenda btn-completar" onclick="completarTareaSeleccionada()">✓ Completar</button>
+                    <button class="btn-agenda btn-eliminar" onclick="eliminarTareaSeleccionada()">🗑 Eliminar</button>
+                    <button class="btn-agenda btn-limpiar" onclick="limpiarTodas()">🧹 Limpiar Todo</button>
+                </div>
+
+                <div class="lista-tareas" id="listaTareas">
+                    <div style="text-align: center; padding: 40px; color: #999;">
+                        ✨ No hay tareas pendientes. ¡Agrega una!
+                    </div>
+                </div>
+
+                <div class="estadisticas">
+                    <div class="estadistica-item">
+                        <div class="estadistica-numero" id="totalTareas">0</div>
+                        <div class="estadistica-label">Total Tareas</div>
+                    </div>
+                    <div class="estadistica-item">
+                        <div class="estadistica-numero" id="tareasPendientes">0</div>
+                        <div class="estadistica-label">Pendientes</div>
+                    </div>
+                    <div class="estadistica-item">
+                        <div class="estadistica-numero" id="tareasCompletadas">0</div>
+                        <div class="estadistica-label">Completadas</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Código Python mostrado -->
+            <div class="code-block">
+                <div style="color: #fff; font-family: 'Courier New', monospace;">
+                    <div><span style="color: #ff79c6;">import</span> <span style="color: #fff;">tkinter as tk</span></div>
+                    <div><span style="color: #ff79c6;">from</span> <span style="color: #fff;">tkinter </span> <span style="color: #ff79c6;">import</span> <span style="color: #fff;">messagebox</span></div>
+                    <div><span style="color: #6272a4;"># Lista para almacenar tareas</span></div>
+                    <div><span style="color: #fff;">tareas = []</span></div>
+                    <div>&nbsp;</div>
+                    <div><span style="color: #ff79c6;">def</span> <span style="color: #50fa7b;">agregar_tarea</span><span style="color: #fff;">():</span></div>
+                    <div><span style="color: #fff;">&nbsp;&nbsp;&nbsp;&nbsp;tarea = entrada_tarea.get()</span></div>
+                    <div><span style="color: #fff;">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #ff79c6;">if</span> <span style="color: #fff;">tarea == </span><span style="color: #f1fa8c;">""</span><span style="color: #fff;">:</span></div>
+                    <div><span style="color: #fff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;messagebox.showwarning(</span><span style="color: #f1fa8c;">"Error"</span><span style="color: #fff;">, </span><span style="color: #f1fa8c;">"Escribe una tarea"</span><span style="color: #fff;">)</span></div>
+                    <div><span style="color: #fff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #ff79c6;">return</span></div>
+                    <div><span style="color: #fff;">&nbsp;&nbsp;&nbsp;&nbsp;tareas.append({</span><span style="color: #f1fa8c;">"texto"</span><span style="color: #fff;">: tarea, </span><span style="color: #f1fa8c;">"completada"</span><span style="color: #fff;">: </span><span style="color: #ff79c6;">False</span><span style="color: #fff;">})</span></div>
+                    <div><span style="color: #fff;">&nbsp;&nbsp;&nbsp;&nbsp;lista_tareas.insert(tk.END, tarea)</span></div>
+                    <div>&nbsp;</div>
+                    <div><span style="color: #ff79c6;">def</span> <span style="color: #50fa7b;">completar_tarea</span><span style="color: #fff;">():</span></div>
+                    <div><span style="color: #fff;">&nbsp;&nbsp;&nbsp;&nbsp;seleccion = lista_tareas.curselection()</span></div>
+                    <div><span style="color: #fff;">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #ff79c6;">if</span> <span style="color: #ff79c6;">not</span> <span style="color: #fff;">seleccion:</span></div>
+                    <div><span style="color: #fff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;messagebox.showwarning(</span><span style="color: #f1fa8c;">"Error"</span><span style="color: #fff;">, </span><span style="color: #f1fa8c;">"Selecciona una tarea"</span><span style="color: #fff;">)</span></div>
+                    <div><span style="color: #fff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #ff79c6;">return</span></div>
+                    <div><span style="color: #fff;">&nbsp;&nbsp;&nbsp;&nbsp;index = seleccion[0]</span></div>
+                    <div><span style="color: #fff;">&nbsp;&nbsp;&nbsp;&nbsp;tareas[index][</span><span style="color: #f1fa8c;">"completada"</span><span style="color: #fff;">] = </span><span style="color: #ff79c6;">True</span></div>
+                </div>
+            </div>
+
+            <!-- Sección explicación -->
+            <div class="explicacion">
+                <h3>📋 Examen Práctico: Agenda de Tareas</h3>
+                <p>
+                    Crear una interfaz gráfica que permita agendar las tareas diarias utilizando 
+                    <strong>Python y Tkinter</strong>, aplicando conceptos de <strong>sentencias IF</strong> 
+                    para la validación y control de flujo.
+                </p>
+                <div class="explicacion-destacado">
+                    <p><strong>⚡ Funcionalidades implementadas:</strong></p>
+                    <ul>
+                        <li>✅ Agregar nuevas tareas a la lista</li>
+                        <li>✅ Marcar tareas como completadas</li>
+                        <li>✅ Eliminar tareas específicas</li>
+                        <li>✅ Limpiar todas las tareas</li>
+                        <li>✅ Validación de campos vacíos con IF</li>
+                        <li>✅ Verificación de selección antes de acciones</li>
+                        <li>✅ Estadísticas en tiempo real</li>
+                        <li>✅ Persistencia visual de tareas completadas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Video explicativo -->
+            <div class="video-container">
+                <iframe src="https://drive.google.com/file/d/1lMFy06eYD9Z8tCdDQrbOlpcIt4GFnwUh/preview" 
+                        allow="autoplay; encrypted-media" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+
+            <!-- Botones de navegación CORREGIDOS -->
+            <div class="nav-buttons">
+                <a href="index.html" class="btn btn-secondary">← Volver al Inicio</a>
+                <a href="deber2.html" class="btn btn-primary">Siguiente Deber →</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p class="highlight">⚡ William Barrionuevo ⚡</p>
+            <p>📚 Materia: Ciberseguridad</p>
+            <p>🎯 Examen Práctico: Agenda de Tareas con Tkinter</p>
+            <p style="margin-top: 20px; opacity: 0.7;">© 2024 - Todos los derechos reservados</p>
+        </div>
+    </div>
+
+    <script>
+        // Array para almacenar las tareas
+        let tareas = [];
+
+        // Función para agregar una tarea
+        function agregarTarea() {
+            const input = document.getElementById('tareaInput');
+            const tareaTexto = input.value.trim();
+
+            if (tareaTexto === "") {
+                mostrarAlerta("Error", "✏️ Escribe una tarea antes de agregar");
+                return;
+            }
+
+            tareas.push({
+                texto: tareaTexto,
+                completada: false
+            });
+
+            input.value = "";
+            actualizarLista();
+        }
+
+        // Función para manejar la tecla Enter
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                agregarTarea();
+            }
+        }
+
+        // Función para marcar/desmarcar tarea como completada
+        function toggleCompletar(index) {
+            tareas[index].completada = !tareas[index].completada;
+            actualizarLista();
+        }
+
+        // Función para eliminar una tarea específica
+        function eliminarTarea(index) {
+            if (confirm(`¿Eliminar la tarea "${tareas[index].texto}"?`)) {
+                tareas.splice(index, 1);
+                actualizarLista();
+            }
+        }
+
+        // Función para completar tarea seleccionada
+        function completarTareaSeleccionada() {
+            const pendientes = tareas.filter(t => !t.completada);
+            if (pendientes.length === 0) {
+                mostrarAlerta("Información", "✅ No hay tareas pendientes para completar");
+                return;
+            }
+
+            const index = tareas.findIndex(t => !t.completada);
+            if (index !== -1) {
+                tareas[index].completada = true;
+                actualizarLista();
+                mostrarAlerta("Éxito", "🎉 ¡Tarea completada!");
+            }
+        }
+
+        // Función para eliminar tarea seleccionada
+        function eliminarTareaSeleccionada() {
+            if (tareas.length === 0) {
+                mostrarAlerta("Error", "📭 No hay tareas para eliminar");
+                return;
+            }
+
+            const pendientes = tareas.filter(t => !t.completada);
+            const index = pendientes.length > 0 ? tareas.findIndex(t => !t.completada) : 0;
+            
+            if (index !== -1 && tareas[index]) {
+                if (confirm(`¿Eliminar "${tareas[index].texto}"?`)) {
+                    tareas.splice(index, 1);
+                    actualizarLista();
+                }
+            }
+        }
+
+        // Función para limpiar todas las tareas
+        function limpiarTodas() {
+            if (tareas.length === 0) {
+                mostrarAlerta("Información", "📭 No hay tareas para limpiar");
+                return;
+            }
+
+            if (confirm("⚠️ ¿Estás seguro de eliminar TODAS las tareas?")) {
+                tareas = [];
+                actualizarLista();
+                mostrarAlerta("Éxito", "🧹 Todas las tareas han sido eliminadas");
+            }
+        }
+
+        // Función para mostrar alertas personalizadas
+        function mostrarAlerta(titulo, mensaje) {
+            const alertDiv = document.createElement('div');
+            alertDiv.style.position = 'fixed';
+            alertDiv.style.top = '20px';
+            alertDiv.style.right = '20px';
+            alertDiv.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            alertDiv.style.color = 'white';
+            alertDiv.style.padding = '15px 25px';
+            alertDiv.style.borderRadius = '15px';
+            alertDiv.style.zIndex = '1000';
+            alertDiv.style.boxShadow = '0 10px 25px rgba(0,0,0,0.2)';
+            alertDiv.style.animation = 'slideIn 0.3s ease';
+            alertDiv.innerHTML = `<strong>${titulo}</strong><br>${mensaje}`;
+            
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                alertDiv.style.opacity = '0';
+                alertDiv.style.transition = 'opacity 0.3s';
+                setTimeout(() => alertDiv.remove(), 300);
+            }, 2000);
+        }
+
+        // Función para actualizar la lista visual
+        function actualizarLista() {
+            const contenedor = document.getElementById('listaTareas');
+            
+            if (tareas.length === 0) {
+                contenedor.innerHTML = '<div style="text-align: center; padding: 40px; color: #999;">✨ No hay tareas pendientes. ¡Agrega una!</div>';
+                actualizarEstadisticas();
+                return;
+            }
+
+            contenedor.innerHTML = '';
+            tareas.forEach((tarea, index) => {
+                const tareaDiv = document.createElement('div');
+                tareaDiv.className = `tarea-item ${tarea.completada ? 'completada' : ''}`;
+                tareaDiv.innerHTML = `
+                    <div class="tarea-texto ${tarea.completada ? 'completada' : ''}">${escapeHtml(tarea.texto)}</div>
+                    <div class="tarea-actions">
+                        <button class="tarea-check" onclick="toggleCompletar(${index})">${tarea.completada ? '↺' : '✓'}</button>
+                        <button class="tarea-delete" onclick="eliminarTarea(${index})">🗑</button>
+                    </div>
+                `;
+                contenedor.appendChild(tareaDiv);
+            });
+
+            actualizarEstadisticas();
+        }
+
+        // Función para escapar HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Función para actualizar estadísticas
+        function actualizarEstadisticas() {
+            const total = tareas.length;
+            const completadas = tareas.filter(t => t.completada).length;
+            const pendientes = total - completadas;
+
+            document.getElementById('totalTareas').textContent = total;
+            document.getElementById('tareasPendientes').textContent = pendientes;
+            document.getElementById('tareasCompletadas').textContent = completadas;
+        }
+
+        // Inicializar
+        actualizarLista();
+    </script>
+</body>
+</html>
